@@ -30,6 +30,10 @@
         color: #171b77;
         margin-top: 30px;
       }
+      h3 {
+        color: #171b77;
+        margin-top: 20px;
+      }
       .last-updated {
         text-align: center;
         color: #666;
@@ -61,8 +65,16 @@
       <p>This app may collect the following information:</p>
       <ul>
         <li>Nickname (for user identification)</li>
-        <li>Protein intake tracking data</li>
-        <li>Goal setting information</li>
+        <li>
+          Nutrition intake tracking data (protein, calories, fat, carbohydrates)
+        </li>
+        <li>
+          Goal setting information (nutrition targets, weight, calculation
+          method)
+        </li>
+        <li>Step count data (via Apple HealthKit / Google Health Connect)</li>
+        <li>Walking distance data</li>
+        <li>Calories burned calculated from steps</li>
         <li>
           App usage data (for analytics features to be implemented in the
           future)
@@ -70,10 +82,64 @@
         <li>Device information (OS, device type, etc.)</li>
       </ul>
 
+      <h3>1.1 Nutrition Record Data</h3>
+      <p>We record and store the following nutrition data:</p>
+      <ul>
+        <li>Food name and intake amount (grams)</li>
+        <li>Protein amount (grams)</li>
+        <li>Calories (kcal)</li>
+        <li>Fat (grams)</li>
+        <li>Carbohydrates (grams)</li>
+        <li>Record date and time</li>
+        <li>Body weight</li>
+      </ul>
+
+      <h3>1.2 Health Data Collection</h3>
+      <p>This app collects the following health data with your consent:</p>
+
+      <p><strong>【For iOS】Data from Apple HealthKit:</strong></p>
+      <ul>
+        <li>Step count data</li>
+        <li>Walking and running distance</li>
+      </ul>
+
+      <p><strong>【For Android】Data from Google Health Connect:</strong></p>
+      <ul>
+        <li>Step count data</li>
+        <li>Distance data</li>
+      </ul>
+
+      <p>This data is used only for the following purposes:</p>
+      <ul>
+        <li>Displaying daily steps and calories burned</li>
+        <li>Displaying weekly and monthly step statistics</li>
+        <li>
+          Analyzing the balance between nutrition intake and exercise
+          consumption
+        </li>
+      </ul>
+
+      <p><strong>Important:</strong></p>
+      <ul>
+        <li>Health data is accessed only when you grant permission</li>
+        <li>Permission can be revoked at any time from your device settings</li>
+        <li>
+          Health data is processed on your device, and only daily summaries
+          (steps, distance, calories burned) are stored on the server
+        </li>
+      </ul>
+
       <h2>2. Purpose of Use</h2>
       <p>The collected information will be used for the following purposes:</p>
       <ul>
-        <li>To provide the basic functions of the app</li>
+        <li>
+          To provide the basic functions of the app (nutrition recording,
+          statistics display, goal management)
+        </li>
+        <li>Analysis and visualization of nutritional balance</li>
+        <li>Automatic calculation of weight-based nutrition goals</li>
+        <li>Retrieving step data and calculating calories burned</li>
+        <li>Statistics display and analysis of exercise volume</li>
         <li>To improve the user experience</li>
         <li>To improve and optimize the app</li>
         <li>
@@ -84,9 +150,28 @@
 
       <h2>3. Storage and Management of Information</h2>
       <ul>
-        <li>Your data is encrypted and stored on our servers.</li>
+        <li>
+          Your nutrition record data is encrypted and stored on our servers.
+        </li>
         <li>Data is managed under appropriate security measures.</li>
-        <li>Some data (such as settings) is stored locally on your device.</li>
+        <li>
+          Some data (such as settings, goals, weight) is stored locally on your
+          device.
+        </li>
+        <li>When using guest mode, all data is stored only on your device.</li>
+        <li>
+          Row-level security (RLS) is applied to nutrition record data,
+          preventing access from other users.
+        </li>
+        <li>
+          Step data is retrieved from HealthKit/Health Connect on your device
+          each time.
+        </li>
+        <li>Daily step summaries are encrypted and stored on the server.</li>
+        <li>
+          Detailed step data (such as hourly breakdowns) is not sent to the
+          server.
+        </li>
       </ul>
 
       <h2>4. Provision to Third Parties</h2>
@@ -133,13 +218,17 @@
       <h2>9. Contact Us</h2>
       <p>
         If you have any questions about this Privacy Policy, please contact us
-        through the <a href="support.html">Support Page</a>.
+        through the
+        <a
+          href="https://t-sakamoto-213.github.io/protein-note-support/protein-note-support/support-en.html"
+          >Support Page</a
+        >.
       </p>
 
-      <p class="last-updated">Last Updated: July 7, 2025</p>
+      <p class="last-updated">Last Updated: November 30, 2025</p>
 
       <div class="back-link">
-        <a href="index.html">Back to Top Page</a>
+        <a href="#">Back to Top</a>
       </div>
     </div>
   </body>
