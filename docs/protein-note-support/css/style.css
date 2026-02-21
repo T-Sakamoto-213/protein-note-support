@@ -160,7 +160,9 @@ a:hover {
    ======================================== */
 
 .screenshots {
-  padding: 40px 0 60px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px 24px 60px;
   overflow: hidden;
 }
 
@@ -177,7 +179,7 @@ a:hover {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding: 0 24px 20px;
+  padding-bottom: 20px;
   scrollbar-width: none;
 }
 
