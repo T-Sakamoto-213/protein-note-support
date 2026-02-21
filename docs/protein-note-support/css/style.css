@@ -156,6 +156,50 @@ a:hover {
 }
 
 /* ========================================
+   Screenshots Gallery
+   ======================================== */
+
+.screenshots {
+  padding: 40px 0 60px;
+  overflow: hidden;
+}
+
+.screenshots .section-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+
+.screenshots-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 24px 20px;
+  scrollbar-width: none;
+}
+
+.screenshots-track::-webkit-scrollbar {
+  display: none;
+}
+
+.screenshots-track img {
+  flex-shrink: 0;
+  width: 240px;
+  height: auto;
+  border-radius: 16px;
+  scroll-snap-align: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s;
+}
+
+.screenshots-track img:hover {
+  transform: scale(1.03);
+}
+
+/* ========================================
    Features Section
    ======================================== */
 
@@ -384,8 +428,13 @@ a:hover {
     gap: 16px;
   }
 
-  .features .section-title {
+  .features .section-title,
+  .screenshots .section-title {
     font-size: 24px;
+  }
+
+  .screenshots-track img {
+    width: 200px;
   }
 
   .site-header .inner {
