@@ -65,7 +65,7 @@
     <!-- Screenshots -->
     <section class="screenshots">
       <h2 class="section-title">アプリ画面</h2>
-      <div class="screenshots-track">
+      <div class="screenshots-track" id="screenshotsTrack">
         <img src="images/Frame 10.jpg" alt="ホーム画面 - 4大栄養素管理" loading="lazy" />
         <img src="images/Frame 11.jpg" alt="AI食品認識" loading="lazy" />
         <img src="images/Frame 13.jpg" alt="カレンダー・記録一覧" loading="lazy" />
@@ -74,7 +74,37 @@
         <img src="images/Frame 14.jpg" alt="歩数管理" loading="lazy" />
         <img src="images/Frame 12.jpg" alt="バッジ・ストリーク" loading="lazy" />
       </div>
+      <div class="screenshots-dots" id="screenshotsDots"></div>
     </section>
+
+    <script>
+      (function () {
+        var track = document.getElementById('screenshotsTrack');
+        var dotsContainer = document.getElementById('screenshotsDots');
+        var images = track.querySelectorAll('img');
+        images.forEach(function (_, i) {
+          var dot = document.createElement('button');
+          dot.setAttribute('aria-label', 'スクリーンショット ' + (i + 1));
+          if (i === 0) dot.classList.add('active');
+          dot.addEventListener('click', function () {
+            images[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          });
+          dotsContainer.appendChild(dot);
+        });
+        var dots = dotsContainer.querySelectorAll('button');
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var idx = Array.prototype.indexOf.call(images, entry.target);
+              dots.forEach(function (d, j) {
+                d.classList.toggle('active', j === idx);
+              });
+            }
+          });
+        }, { root: track, threshold: 0.6 });
+        images.forEach(function (img) { observer.observe(img); });
+      })();
+    </script>
 
     <!-- Features -->
     <section class="features" id="features">
