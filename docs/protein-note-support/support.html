@@ -4,98 +4,58 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>サポート - プロテインノート</title>
-    <style>
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-          "Helvetica Neue", Arial, sans-serif;
-        line-height: 1.6;
-        color: #333;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f5f5f5;
-      }
-      .container {
-        background-color: white;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-      }
-      h1 {
-        color: #171b77;
-        border-bottom: 2px solid #171b77;
-        padding-bottom: 10px;
-        margin-bottom: 30px;
-      }
-      .support-options {
-        margin: 40px 0;
-      }
-      .option {
-        margin: 30px 0;
-        padding: 20px;
-        background-color: #f8f9fa;
-        border-radius: 8px;
-      }
-      .option h2 {
-        color: #171b77;
-        margin-bottom: 15px;
-      }
-      .contact-button {
-        display: inline-block;
-        background-color: #171b77;
-        color: white;
-        padding: 15px 30px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        margin-top: 20px;
-        transition: background-color 0.3s;
-      }
-      .contact-button:hover {
-        background-color: #0f1250;
-      }
-      .note {
-        color: #666;
-        font-size: 14px;
-        margin-top: 10px;
-      }
-    </style>
+    <meta name="description" content="プロテインノートのサポートページ" />
+    <link rel="icon" href="images/icon.png" type="image/png" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>プロテインノート サポート</h1>
+    <header class="site-header">
+      <div class="inner">
+        <a href="./" class="logo">
+          <img src="images/icon.png" alt="プロテインノート" />
+          Protein Note
+        </a>
+        <nav>
+          <a href="support-en.html">English</a>
+          <a href="./">ホーム</a>
+        </nav>
+      </div>
+    </header>
 
-      <p>アプリに関するお問い合わせやフィードバックを歓迎します。</p>
+    <main class="page-content">
+      <h1>サポート</h1>
+      <p class="last-updated">アプリに関するお問い合わせやフィードバックを歓迎します。</p>
 
-      <div class="support-options">
-        <div class="option">
-          <h2>お問い合わせフォーム</h2>
-          <p>
-            バグ報告、機能要望、その他のお問い合わせは以下のフォームからお願いします。
-          </p>
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfLhSgNEo5iZQfnCL6oPT1vJUbS_xK7rGv7GXzI8Xv6MFX9Tw/viewform"
-            class="contact-button"
-            target="_blank"
-          >
-            お問い合わせフォームを開く
-          </a>
-          <p class="note">※ Google Formsが開きます</p>
-        </div>
-
-        <div class="option">
-          <h2>App Store レビュー</h2>
-          <p>アプリの評価やレビューでのフィードバックも大変参考になります。</p>
-          <p class="note">
-            App Storeのアプリページからレビューをお願いします。
-          </p>
-        </div>
+      <div class="support-card">
+        <h2>お問い合わせフォーム</h2>
+        <p>バグ報告、機能要望、その他のお問い合わせは以下のフォームからお願いします。</p>
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfLhSgNEo5iZQfnCL6oPT1vJUbS_xK7rGv7GXzI8Xv6MFX9Tw/viewform"
+          class="btn-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          お問い合わせフォームを開く
+        </a>
+        <p class="support-note">Google Formsが開きます</p>
       </div>
 
-      <div style="margin-top: 50px">
-        <p><a href="privacy.html">プライバシーポリシー</a></p>
+      <div class="support-card">
+        <h2>App Store レビュー</h2>
+        <p>アプリの評価やレビューでのフィードバックも大変参考になります。</p>
+        <p class="support-note">App Storeのアプリページからレビューをお願いします。</p>
       </div>
-    </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="inner">
+        <nav>
+          <a href="./">ホーム</a>
+          <a href="privacy.html">プライバシーポリシー</a>
+          <a href="support-en.html">Support (EN)</a>
+        </nav>
+        <p class="copyright">&copy; 2025 Protein Note. All rights reserved.</p>
+      </div>
+    </footer>
   </body>
 </html>

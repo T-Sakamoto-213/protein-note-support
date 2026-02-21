@@ -1,0 +1,421 @@
+/* ========================================
+   Protein Note - Shared Styles
+   Dark theme matching app design tokens
+   ======================================== */
+
+:root {
+  --bg: #0A0A0A;
+  --surface: #141414;
+  --surface-elevated: #1C1C1E;
+  --primary: #00F0A0;
+  --primary-dim: rgba(0, 240, 160, 0.15);
+  --text: #FFFFFF;
+  --text-secondary: #8E8E93;
+  --text-tertiary: #636366;
+  --border: #2C2C2E;
+  --protein: #00F0A0;
+  --calories: #FF6B6B;
+  --fat: #4ECDC4;
+  --carbs: #FFD93D;
+  --max-width: 960px;
+  --content-width: 800px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* ========================================
+   Header / Navigation
+   ======================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header .inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-header .logo img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 24px;
+  font-size: 14px;
+}
+
+.site-header nav a {
+  color: var(--text-secondary);
+}
+
+.site-header nav a:hover {
+  color: var(--text);
+  opacity: 1;
+}
+
+/* ========================================
+   Hero Section
+   ======================================== */
+
+.hero {
+  text-align: center;
+  padding: 80px 24px 60px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.hero .app-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 28px;
+  box-shadow: 0 8px 32px rgba(0, 240, 160, 0.2);
+  margin-bottom: 32px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--primary), #4ECDC4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero .tagline {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.hero .store-badge {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.hero .store-badge:hover {
+  transform: scale(1.05);
+}
+
+.hero .store-badge img {
+  height: 54px;
+}
+
+/* ========================================
+   Features Section
+   ======================================== */
+
+.features {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.features .section-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 48px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+}
+
+.feature-card .icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.feature-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Nutrient color accents */
+.feature-card.accent-protein { border-top: 3px solid var(--protein); }
+.feature-card.accent-calories { border-top: 3px solid var(--calories); }
+.feature-card.accent-fat { border-top: 3px solid var(--fat); }
+.feature-card.accent-carbs { border-top: 3px solid var(--carbs); }
+.feature-card.accent-primary { border-top: 3px solid var(--primary); }
+
+/* ========================================
+   Footer
+   ======================================== */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.site-footer .inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.site-footer nav {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.site-footer nav a {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.site-footer nav a:hover {
+  color: var(--text);
+}
+
+.site-footer .copyright {
+  color: var(--text-tertiary);
+  font-size: 13px;
+}
+
+/* ========================================
+   Sub-page Styles (Privacy, Support, etc.)
+   ======================================== */
+
+.page-content {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.page-content h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+
+.page-content .last-updated {
+  color: var(--text-tertiary);
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+.page-content h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 40px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-content h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.page-content p {
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.page-content ul {
+  color: var(--text-secondary);
+  padding-left: 24px;
+  margin-bottom: 12px;
+}
+
+.page-content li {
+  margin-bottom: 6px;
+}
+
+.page-content strong {
+  color: var(--text);
+}
+
+.page-content a {
+  color: var(--primary);
+}
+
+/* Support page specifics */
+.support-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 24px 0;
+  text-align: center;
+}
+
+.support-card h2 {
+  border-bottom: none;
+  margin-top: 0;
+  text-align: center;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--primary);
+  color: #000;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: 12px;
+  margin-top: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 240, 160, 0.3);
+  opacity: 1;
+}
+
+.support-note {
+  color: var(--text-tertiary) !important;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 60px 20px 40px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero .tagline {
+    font-size: 16px;
+  }
+
+  .hero .app-icon {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .features .section-title {
+    font-size: 24px;
+  }
+
+  .site-header .inner {
+    padding: 10px 16px;
+  }
+
+  .site-header nav {
+    gap: 16px;
+    font-size: 13px;
+  }
+
+  .site-footer nav {
+    gap: 20px;
+  }
+
+  .page-content {
+    padding: 32px 20px 60px;
+  }
+
+  .page-content h1 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .site-header nav {
+    gap: 12px;
+  }
+}
