@@ -404,7 +404,7 @@ a:hover {
 .btn-primary {
   display: inline-block;
   background: var(--primary);
-  color: #000;
+  color: #000 !important;
   font-weight: 700;
   font-size: 15px;
   padding: 14px 32px;
