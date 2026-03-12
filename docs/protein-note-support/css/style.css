@@ -228,9 +228,19 @@ a:hover {
 }
 
 .pain-icon {
-  font-size: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(255, 107, 107, 0.1);
+  color: var(--calories);
+  margin-bottom: 16px;
+}
+
+.pain-icon svg {
   display: block;
-  margin-bottom: 12px;
 }
 
 .pain-item p {
@@ -361,9 +371,39 @@ a:hover {
 }
 
 .feature-card .icon {
-  font-size: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
   margin-bottom: 16px;
+  color: var(--primary);
+  background: var(--primary-dim);
+}
+
+.feature-card .icon svg {
   display: block;
+}
+
+.feature-card.accent-protein .icon {
+  color: var(--protein);
+  background: rgba(0, 240, 160, 0.1);
+}
+
+.feature-card.accent-calories .icon {
+  color: var(--calories);
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.feature-card.accent-fat .icon {
+  color: var(--fat);
+  background: rgba(78, 205, 196, 0.1);
+}
+
+.feature-card.accent-carbs .icon {
+  color: var(--carbs);
+  background: rgba(255, 217, 61, 0.1);
 }
 
 .feature-card h3 {
@@ -415,9 +455,19 @@ a:hover {
 }
 
 .use-case-icon {
-  font-size: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: var(--primary-dim);
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.use-case-icon svg {
   display: block;
-  margin-bottom: 16px;
 }
 
 .use-case-card h3 {
