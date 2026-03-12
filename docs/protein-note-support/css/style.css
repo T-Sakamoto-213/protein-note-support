@@ -110,7 +110,7 @@ a:hover {
 
 .hero {
   text-align: center;
-  padding: 80px 24px 60px;
+  padding: 80px 24px 48px;
   max-width: var(--max-width);
   margin: 0 auto;
 }
@@ -139,7 +139,7 @@ a:hover {
   color: var(--text-secondary);
   max-width: 480px;
   margin: 0 auto 40px;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 .hero .store-badge {
@@ -153,6 +153,105 @@ a:hover {
 
 .hero .store-badge img {
   height: 54px;
+}
+
+.hero-sub {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+/* ========================================
+   Stats Bar
+   ======================================== */
+
+.stats-bar {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 32px 24px;
+}
+
+.stats-bar .inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  text-align: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-number {
+  font-size: 36px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), #4ECDC4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ========================================
+   Pain Points Section
+   ======================================== */
+
+.pain-points {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 64px 24px 48px;
+  text-align: center;
+}
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 40px 0 32px;
+}
+
+.pain-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 20px;
+}
+
+.pain-icon {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.pain-item p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.pain-item strong {
+  color: var(--calories);
+}
+
+.pain-solution {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 8px;
+}
+
+.pain-solution strong {
+  color: var(--primary);
 }
 
 /* ========================================
@@ -231,10 +330,11 @@ a:hover {
 .features {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 40px 24px 80px;
+  padding: 40px 24px 64px;
 }
 
-.features .section-title {
+.features .section-title,
+.section-title {
   text-align: center;
   font-size: 28px;
   font-weight: 700;
@@ -284,6 +384,101 @@ a:hover {
 .feature-card.accent-fat { border-top: 3px solid var(--fat); }
 .feature-card.accent-carbs { border-top: 3px solid var(--carbs); }
 .feature-card.accent-primary { border-top: 3px solid var(--primary); }
+
+/* ========================================
+   Use Cases Section
+   ======================================== */
+
+.use-cases {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 64px 24px;
+}
+
+.use-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.use-case-card {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 36px 24px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.use-case-card:hover {
+  transform: translateY(-4px);
+}
+
+.use-case-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.use-case-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+
+.use-case-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ========================================
+   CTA Section
+   ======================================== */
+
+.cta-section {
+  text-align: center;
+  padding: 80px 24px;
+  background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+  border-top: 1px solid var(--border);
+}
+
+.cta-section h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--primary), #4ECDC4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cta-section p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+.cta-section .store-badge {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.cta-section .store-badge:hover {
+  transform: scale(1.05);
+}
+
+.cta-section .store-badge img {
+  height: 54px;
+}
+
+.cta-free {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--text-tertiary) !important;
+}
 
 /* ========================================
    Footer
@@ -448,12 +643,32 @@ a:hover {
     border-radius: 22px;
   }
 
+  .stats-bar .inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .stat-number {
+    font-size: 28px;
+  }
+
+  .pain-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
   .features-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
+  .use-cases-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
   .features .section-title,
+  .section-title,
   .screenshots .section-title {
     font-size: 24px;
   }
@@ -482,6 +697,18 @@ a:hover {
   .page-content h1 {
     font-size: 26px;
   }
+
+  .cta-section h2 {
+    font-size: 26px;
+  }
+
+  .cta-section p {
+    font-size: 15px;
+  }
+
+  .pain-solution {
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -491,5 +718,10 @@ a:hover {
 
   .site-header nav {
     gap: 12px;
+  }
+
+  .stats-bar .inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 }
