@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>サポート - プロテインノート</title>
-    <meta name="description" content="プロテインノート（iOS栄養管理・筋トレ記録アプリ）のサポートページ。お問い合わせフォームとよくある質問へのご案内。" />
+    <meta name="description" content="プロテインノート（iOS栄養管理・筋トレ記録アプリ）のサポートページ。お問い合わせフォーム、解約方法・データ削除・機種変更の引き継ぎなどのよくある質問。" />
     <link rel="canonical" href="https://protein-note.theslopebook.jp/support.html" />
     <link rel="alternate" hreflang="ja" href="https://protein-note.theslopebook.jp/support.html" />
     <link rel="alternate" hreflang="en" href="https://protein-note.theslopebook.jp/support-en.html" />
     <link rel="alternate" hreflang="x-default" href="https://protein-note.theslopebook.jp/support.html" />
     <meta property="og:site_name" content="プロテインノート" />
     <meta property="og:title" content="サポート - プロテインノート" />
-    <meta property="og:description" content="プロテインノート（iOS栄養管理・筋トレ記録アプリ）のサポートページ。" />
+    <meta property="og:description" content="お問い合わせフォーム、解約方法・データ削除・機種変更の引き継ぎなどのよくある質問。" />
     <meta property="og:image" content="https://protein-note.theslopebook.jp/images/og-image.jpg" />
     <meta property="og:url" content="https://protein-note.theslopebook.jp/support.html" />
     <meta property="og:type" content="website" />
@@ -20,15 +20,56 @@
     <link rel="icon" href="images/icon.png" type="image/png" />
     <link rel="apple-touch-icon" href="images/icon-180.png" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/lp.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "プレミアム（サブスクリプション）の解約方法は？",
+          "acceptedAnswer": { "@type": "Answer", "text": "iPhoneの「設定」→ 一番上のApple ID → 「サブスクリプション」→ プロテインノートを選び、「サブスクリプションをキャンセル」で解約できます。解約後も支払い済みの期間が終わるまでプレミアムは有効です。アプリを削除しただけでは解約されないのでご注意ください。" }
+        },
+        {
+          "@type": "Question",
+          "name": "アカウントとデータを削除したい",
+          "acceptedAnswer": { "@type": "Answer", "text": "アプリ内の設定画面からアカウントの削除をリクエストできます。削除後、サーバーに保存されたデータは合理的な期間内に削除されます。ゲストモードのデータは端末内にのみ保存されているため、アプリを削除すれば消去されます。" }
+        },
+        {
+          "@type": "Question",
+          "name": "機種変更でデータは引き継げますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "アカウント（Sign in with Apple・Google・ユーザーID）でログインしていれば、新しい端末で同じアカウントにログインするだけで記録が引き継がれます。ゲストモードのデータは端末内にのみ保存されるため引き継げません。機種変更の前にアカウント登録をおすすめします。" }
+        },
+        {
+          "@type": "Question",
+          "name": "食事フォトログの写真は機種変更後も残りますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "残りません。食事フォトログの写真はプライバシー保護のため端末内にのみ保存されており、アプリの削除・機種変更・端末の初期化で失われます。栄養素などの記録データ自体はアカウントがあれば引き継がれます。" }
+        },
+        {
+          "@type": "Question",
+          "name": "ヘルスケア（HealthKit）連携がうまく動きません",
+          "acceptedAnswer": { "@type": "Answer", "text": "iPhoneの「設定」→「プライバシーとセキュリティ」→「ヘルスケア」→「プロテインノート」で、歩数・体重などの読み取り許可がオンになっているか確認してください。改善しない場合は、アプリ内で連携を一度解除してから再連携をお試しください。" }
+        },
+        {
+          "@type": "Question",
+          "name": "問い合わせの返信はどれくらいで届きますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "内容により数日いただく場合があります。バグ報告の際は、発生手順・スクリーンショット・端末とアプリのバージョンを添えていただけると解決が早くなります。" }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <header class="site-header">
       <div class="inner">
         <a href="./" class="logo">
-          <img src="images/icon.png" alt="プロテインノート" />
+          <img src="images/icon.png" alt="プロテインノート" width="32" height="32" />
           Protein Note
         </a>
         <nav>
+          <a href="#faq">FAQ</a>
           <a href="support-en.html">English</a>
           <a href="./">ホーム</a>
         </nav>
@@ -36,28 +77,85 @@
     </header>
 
     <main class="page-content">
-      <h1>サポート</h1>
-      <p class="last-updated">アプリに関するお問い合わせやフィードバックを歓迎します。</p>
+      <h1>お困りですか？<span class="grad">サポート</span></h1>
+      <p class="support-lead">
+        お問い合わせ・バグ報告・機能要望を歓迎します。よくある質問は下のFAQで自己解決できるかもしれません。
+      </p>
 
-      <div class="support-card">
-        <h2>お問い合わせフォーム</h2>
-        <p>バグ報告、機能要望、その他のお問い合わせは以下のフォームからお願いします。</p>
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfIsVPSIwEbytsJuBLgjlMA1STyDdxU_weOQvcfr8w7mrniLg/viewform"
-          class="btn-primary"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          お問い合わせフォームを開く
-        </a>
-        <p class="support-note">Google Formsが開きます</p>
+      <div class="support-grid">
+        <div class="support-card">
+          <h2>お問い合わせ</h2>
+          <p>バグ報告、機能要望、その他のお問い合わせはフォームからどうぞ。</p>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfIsVPSIwEbytsJuBLgjlMA1STyDdxU_weOQvcfr8w7mrniLg/viewform"
+            class="btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            フォームを開く
+          </a>
+          <p class="support-note">Google Formsが開きます</p>
+        </div>
+
+        <div class="support-card">
+          <h2>レビューを書く</h2>
+          <p>アプリの評価・レビューが開発の大きな励みになります。</p>
+          <a
+            href="https://apps.apple.com/jp/app/id6748221439?action=write-review"
+            class="btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            App Storeでレビュー
+          </a>
+          <p class="support-note">レビュー画面が直接開きます</p>
+        </div>
+
+        <div class="support-card">
+          <h2>アプリを入手</h2>
+          <p>プロテインノートは無料でダウンロードできます。</p>
+          <a
+            href="https://apps.apple.com/jp/app/id6748221439"
+            class="btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            App Storeで開く
+          </a>
+          <p class="support-note">iOS向け・基本機能無料</p>
+        </div>
       </div>
 
-      <div class="support-card">
-        <h2>App Store レビュー</h2>
-        <p>アプリの評価やレビューでのフィードバックも大変参考になります。</p>
-        <p class="support-note">App Storeのアプリページからレビューをお願いします。</p>
-      </div>
+      <section class="faq" id="faq">
+        <h2 class="section-title">よくある質問</h2>
+        <details>
+          <summary>プレミアム（サブスクリプション）の解約方法は？</summary>
+          <p>iPhoneの「設定」→ 一番上のApple ID → 「サブスクリプション」→ プロテインノートを選び、「サブスクリプションをキャンセル」で解約できます。解約後も支払い済みの期間が終わるまでプレミアムは有効です。アプリを削除しただけでは解約されないのでご注意ください。</p>
+        </details>
+        <details>
+          <summary>アカウントとデータを削除したい</summary>
+          <p>アプリ内の設定画面からアカウントの削除をリクエストできます。削除後、サーバーに保存されたデータは合理的な期間内に削除されます。ゲストモードのデータは端末内にのみ保存されているため、アプリを削除すれば消去されます。</p>
+        </details>
+        <details>
+          <summary>機種変更でデータは引き継げますか？</summary>
+          <p>アカウント（Sign in with Apple・Google・ユーザーID）でログインしていれば、新しい端末で同じアカウントにログインするだけで記録が引き継がれます。ゲストモードのデータは端末内にのみ保存されるため引き継げません。機種変更の前にアカウント登録をおすすめします。</p>
+        </details>
+        <details>
+          <summary>食事フォトログの写真は機種変更後も残りますか？</summary>
+          <p>残りません。食事フォトログの写真はプライバシー保護のため端末内にのみ保存されており、アプリの削除・機種変更・端末の初期化で失われます。栄養素などの記録データ自体はアカウントがあれば引き継がれます。</p>
+        </details>
+        <details>
+          <summary>ヘルスケア（HealthKit）連携がうまく動きません</summary>
+          <p>iPhoneの「設定」→「プライバシーとセキュリティ」→「ヘルスケア」→「プロテインノート」で、歩数・体重などの読み取り許可がオンになっているか確認してください。改善しない場合は、アプリ内で連携を一度解除してから再連携をお試しください。</p>
+        </details>
+        <details>
+          <summary>問い合わせの返信はどれくらいで届きますか？</summary>
+          <p>内容により数日いただく場合があります。バグ報告の際は、発生手順・スクリーンショット・端末とアプリのバージョンを添えていただけると解決が早くなります。</p>
+        </details>
+        <p class="faq-note">
+          料金や機能については<a href="./#faq">トップページのFAQ</a>もご覧ください。
+        </p>
+      </section>
     </main>
 
     <footer class="site-footer">

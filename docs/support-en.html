@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Support - Protein Note</title>
-    <meta name="description" content="Support page for Protein Note, an iOS nutrition and workout tracking app. Contact form and frequently asked questions." />
+    <meta name="description" content="Support page for Protein Note, an iOS nutrition and workout tracking app. Contact form and FAQs on cancelling your subscription, deleting your data, and transferring to a new device." />
     <link rel="canonical" href="https://protein-note.theslopebook.jp/support-en.html" />
     <link rel="alternate" hreflang="ja" href="https://protein-note.theslopebook.jp/support.html" />
     <link rel="alternate" hreflang="en" href="https://protein-note.theslopebook.jp/support-en.html" />
     <link rel="alternate" hreflang="x-default" href="https://protein-note.theslopebook.jp/support.html" />
     <meta property="og:site_name" content="Protein Note" />
     <meta property="og:title" content="Support - Protein Note" />
-    <meta property="og:description" content="Support page for Protein Note, an iOS nutrition and workout tracking app." />
+    <meta property="og:description" content="Contact form and FAQs on cancelling your subscription, deleting your data, and transferring to a new device." />
     <meta property="og:image" content="https://protein-note.theslopebook.jp/images/og-image.jpg" />
     <meta property="og:url" content="https://protein-note.theslopebook.jp/support-en.html" />
     <meta property="og:type" content="website" />
@@ -20,15 +20,56 @@
     <link rel="icon" href="images/icon.png" type="image/png" />
     <link rel="apple-touch-icon" href="images/icon-180.png" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/lp.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I cancel my Premium subscription?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Open iPhone Settings, tap your Apple ID at the top, then Subscriptions, select Protein Note and tap Cancel Subscription. Premium stays active until the end of the paid period. Note that deleting the app does not cancel the subscription." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I delete my account and data?",
+          "acceptedAnswer": { "@type": "Answer", "text": "You can request account deletion from the settings screen inside the app. After deletion, data stored on our servers is removed within a reasonable period. Guest-mode data is stored only on your device, so deleting the app erases it." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I transfer my data to a new device?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, if you are signed in with an account (Sign in with Apple, Google, or a user ID), simply sign in on the new device and your records carry over. Guest-mode data is stored only on the device and cannot be transferred, so we recommend creating an account before switching devices." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do Meal Photo Log photos survive a device change?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Meal Photo Log photos are stored only on your device for privacy, and are lost when you delete the app, switch devices, or reset the device. Your nutrition records themselves carry over if you have an account." }
+        },
+        {
+          "@type": "Question",
+          "name": "Apple Health (HealthKit) sync is not working",
+          "acceptedAnswer": { "@type": "Answer", "text": "Check iPhone Settings > Privacy & Security > Health > Protein Note and make sure read access for steps and weight is turned on. If it still does not work, disconnect and reconnect the integration inside the app." }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does a reply take?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Replies may take a few days depending on the inquiry. For bug reports, including reproduction steps, screenshots, and your device and app versions helps us resolve the issue faster." }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <header class="site-header">
       <div class="inner">
         <a href="./" class="logo">
-          <img src="images/icon.png" alt="Protein Note" />
+          <img src="images/icon.png" alt="Protein Note" width="32" height="32" />
           Protein Note
         </a>
         <nav>
+          <a href="#faq">FAQ</a>
           <a href="support.html">日本語</a>
           <a href="./">Home</a>
         </nav>
@@ -36,37 +77,91 @@
     </header>
 
     <main class="page-content">
-      <h1>Support</h1>
-      <p class="last-updated">We welcome your inquiries and feedback about the app.</p>
+      <h1>Need help? <span class="grad">Support</span></h1>
+      <p class="support-lead">
+        We welcome inquiries, bug reports, and feature requests. You may also find an answer in the FAQ below.
+      </p>
 
-      <div class="support-card">
-        <h2>Contact Form</h2>
-        <p>For bug reports, feature requests, or other inquiries, please use the form below.</p>
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfIsVPSIwEbytsJuBLgjlMA1STyDdxU_weOQvcfr8w7mrniLg/viewform"
-          class="btn-primary"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open Contact Form
-        </a>
-        <p class="support-note">This will open a Google Form.</p>
+      <div class="support-grid">
+        <div class="support-card">
+          <h2>Contact Us</h2>
+          <p>For bug reports, feature requests, and other inquiries, please use the form.</p>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfIsVPSIwEbytsJuBLgjlMA1STyDdxU_weOQvcfr8w7mrniLg/viewform"
+            class="btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open the form
+          </a>
+          <p class="support-note">Opens Google Forms</p>
+        </div>
+
+        <div class="support-card">
+          <h2>Write a Review</h2>
+          <p>Your ratings and reviews are a great encouragement to development.</p>
+          <a
+            href="https://apps.apple.com/jp/app/id6748221439?action=write-review"
+            class="btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Review on the App Store
+          </a>
+          <p class="support-note">Opens the review screen directly</p>
+        </div>
+
+        <div class="support-card">
+          <h2>Get the App</h2>
+          <p>Protein Note is free to download.</p>
+          <a
+            href="https://apps.apple.com/jp/app/id6748221439"
+            class="btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open the App Store
+          </a>
+          <p class="support-note">For iOS, core features free</p>
+        </div>
       </div>
 
-      <div class="support-card">
-        <h2>App Store Review</h2>
-        <p>Your feedback through ratings and reviews on the App Store is also very helpful.</p>
-        <p class="support-note">Please leave a review on our App Store page.</p>
-      </div>
+      <section class="faq" id="faq">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <details>
+          <summary>How do I cancel my Premium subscription?</summary>
+          <p>Open iPhone Settings, tap your Apple ID at the top, then Subscriptions, select Protein Note and tap Cancel Subscription. Premium stays active until the end of the paid period. Note that deleting the app does not cancel the subscription.</p>
+        </details>
+        <details>
+          <summary>How do I delete my account and data?</summary>
+          <p>You can request account deletion from the settings screen inside the app. After deletion, data stored on our servers is removed within a reasonable period. Guest-mode data is stored only on your device, so deleting the app erases it.</p>
+        </details>
+        <details>
+          <summary>Can I transfer my data to a new device?</summary>
+          <p>Yes, if you are signed in with an account (Sign in with Apple, Google, or a user ID), simply sign in on the new device and your records carry over. Guest-mode data is stored only on the device and cannot be transferred, so we recommend creating an account before switching devices.</p>
+        </details>
+        <details>
+          <summary>Do Meal Photo Log photos survive a device change?</summary>
+          <p>No. Meal Photo Log photos are stored only on your device for privacy, and are lost when you delete the app, switch devices, or reset the device. Your nutrition records themselves carry over if you have an account.</p>
+        </details>
+        <details>
+          <summary>Apple Health (HealthKit) sync is not working</summary>
+          <p>Check iPhone Settings &gt; Privacy &amp; Security &gt; Health &gt; Protein Note and make sure read access for steps and weight is turned on. If it still does not work, disconnect and reconnect the integration inside the app.</p>
+        </details>
+        <details>
+          <summary>How long does a reply take?</summary>
+          <p>Replies may take a few days depending on the inquiry. For bug reports, including reproduction steps, screenshots, and your device and app versions helps us resolve the issue faster.</p>
+        </details>
+      </section>
     </main>
 
     <footer class="site-footer">
       <div class="inner">
         <nav>
           <a href="./">Home</a>
-          <a href="terms.html">利用規約</a>
+          <a href="terms.html">Terms (JA)</a>
           <a href="privacy-en.html">Privacy Policy</a>
-          <a href="support.html">サポート</a>
+          <a href="support.html">サポート (JA)</a>
         </nav>
         <p class="copyright">&copy; 2025-2026 Protein Note. All rights reserved.</p>
       </div>
