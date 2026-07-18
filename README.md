@@ -20,8 +20,7 @@ docs/                          ← GitHub Pages のルート (main ブランチ 
 ├── robots.txt                 # ドメイン直下で配信される(AIクローラー許可+Sitemap)
 ├── 2cf87dde98d34a11997337121a87b4ec.txt  # IndexNowキー(Bing即時インデックス用・削除しないこと)
 ├── images/                    # 最適化済み画像 (JPEG 720-750px幅・各150KB以下)
-├── .nojekyll
-└── protein-note-support/      # 旧URL互換のリダイレクトスタブのみ(削除しないこと)
+└── .nojekyll
 ```
 
 ## ローカルプレビュー
@@ -39,7 +38,7 @@ VSCodeのLive Server(ポート5501設定済み)でも可。`docs/` をルート�
 
 - カスタムドメイン: `protein-note.theslopebook.jp`(`docs/CNAME`)。DNS側は `theslopebook.jp` のDNSレコード設定で CNAME `protein-note` → `t-sakamoto-213.github.io`
 - HTTPS: GitHubリポジトリの Settings → Pages で証明書発行後「Enforce HTTPS」をON
-- 旧URL(`t-sakamoto-213.github.io/protein-note-support/...`)はGitHubの自動301+`docs/protein-note-support/`内のスタブで新URLへ誘導される。App Store Connect記載のURLを新ドメインに更新するまでスタブは残すこと
+- 旧URL(`t-sakamoto-213.github.io/...`)はGitHubの自動301で新ドメインへ誘導される(App Store Connect記載のURLは新ドメインに更新済み。旧パス`/protein-note-support/`のリダイレクトスタブは2026-07-18に廃止)
 
 ## 法的文書の同期ルール(重要)
 
