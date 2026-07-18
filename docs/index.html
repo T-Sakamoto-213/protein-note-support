@@ -156,6 +156,7 @@
             </p>
             <a
               href="https://apps.apple.com/jp/app/id6748221439"
+              data-cta="hero"
               class="store-badge"
               target="_blank"
               rel="noopener noreferrer"
@@ -421,6 +422,7 @@
           <p>あなたのコーチを選んで、今日からはじめよう。</p>
           <a
             href="https://apps.apple.com/jp/app/id6748221439"
+            data-cta="mid_coach"
             class="store-badge"
             target="_blank"
             rel="noopener noreferrer"
@@ -598,6 +600,7 @@
         <div class="mid-cta">
           <a
             href="https://apps.apple.com/jp/app/id6748221439"
+            data-cta="mid_faq"
             class="store-badge"
             target="_blank"
             rel="noopener noreferrer"
@@ -661,6 +664,7 @@
         </p>
         <a
           href="https://apps.apple.com/jp/app/id6748221439"
+          data-cta="final"
           class="store-badge"
           target="_blank"
           rel="noopener noreferrer"
@@ -677,7 +681,7 @@
       </section>
     </main>
 
-    <a class="float-cta" id="floatCta" href="https://apps.apple.com/jp/app/id6748221439" target="_blank" rel="noopener noreferrer">
+    <a class="float-cta" id="floatCta" href="https://apps.apple.com/jp/app/id6748221439" data-cta="float">
       App Storeで無料ダウンロード
     </a>
 
@@ -698,5 +702,14 @@
     </footer>
 
     <script src="js/lp.js" defer></script>
+    <script>
+      document.querySelectorAll('[data-cta]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (typeof gtag === 'function') {
+            gtag('event', 'cta_click', { cta_location: a.getAttribute('data-cta') });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
