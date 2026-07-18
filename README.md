@@ -39,7 +39,7 @@ VSCodeのLive Server(ポート5501設定済み)でも可。`docs/` をルート�
 
 - カスタムドメイン: `protein-note.theslopebook.jp`(`docs/CNAME`)。DNS側は `theslopebook.jp` のDNSレコード設定で CNAME `protein-note` → `t-sakamoto-213.github.io`
 - HTTPS: GitHubリポジトリの Settings → Pages で証明書発行後「Enforce HTTPS」をON
-- 旧URL(`t-sakamoto-213.github.io/protein-note-support/...`)はGitHubの自動301+`docs/protein-note-support/`内のスタブで新URLへ誘導される。App Store Connect記載のURLを新ドメインに更新するまでスタブは残すこと
+- 旧URL(`t-sakamoto-213.github.io/protein-note-support/...`)はGitHubの自動301+`docs/protein-note-support/`内のスタブで新URLへ誘導される。旧URLへの流入が完全になくなるまでスタブは残すこと(App Store Connect のURLは新ドメインに更新済みだが、検索結果・外部リンクからの流入が残っている)
 
 ## 法的文書の同期ルール(重要)
 
