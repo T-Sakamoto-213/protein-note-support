@@ -32,6 +32,7 @@
 ## ページ
 
 - [紹介ページ](https://protein-note.theslopebook.jp/): アプリの機能・料金・FAQ
+- [よくある質問（FAQ）](https://protein-note.theslopebook.jp/faq.html): 料金・解約・引き継ぎ・データの扱いなど19問の詳細FAQ
 - [プライバシーポリシー](https://protein-note.theslopebook.jp/privacy.html)
 - [Privacy Policy (English)](https://protein-note.theslopebook.jp/privacy-en.html)
 - [利用規約](https://protein-note.theslopebook.jp/terms.html)
