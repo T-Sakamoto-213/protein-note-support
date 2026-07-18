@@ -16,6 +16,7 @@ docs/                          ← GitHub Pages のルート (main ブランチ 
 ├── privacy.html / privacy-en.html
 ├── terms.html
 ├── support.html / support-en.html
+├── guide/                     # 使い方ガイド(目次+6テーマ・アプリ実装に基づく公式ドキュメント)
 ├── sitemap.xml / llms.txt     # SEO / AI検索(AIO)用
 ├── robots.txt                 # ドメイン直下で配信される(AIクローラー許可+Sitemap)
 ├── 2cf87dde98d34a11997337121a87b4ec.txt  # IndexNowキー(Bing即時インデックス用・削除しないこと)
