@@ -1,0 +1,1081 @@
+/* ========================================
+   Protein Note LP — 3D scroll experience layer
+   Progressive enhancement:
+     - default (no JS)   : everything static & visible
+     - html.js           : 3D scenes driven by --p (0..1) from js/lp.js
+     - html.reduced      : prefers-reduced-motion → same as no JS
+   Only transform / opacity are animated.
+   ======================================== */
+
+main {
+  overflow-x: clip;
+}
+
+.grad {
+  background: linear-gradient(135deg, var(--primary), #4ecdc4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sp {
+  display: none;
+}
+
+/* Scroll progress HUD */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 300;
+  background: linear-gradient(90deg, var(--primary), #4ecdc4);
+  transform: scaleX(var(--sp, 0));
+  transform-origin: left;
+  pointer-events: none;
+}
+
+html:not(.js) .scroll-progress {
+  display: none;
+}
+
+/* Reveal-on-enter (visible by default; JS opts in to the animation) */
+html.js:not(.reduced) [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+html.js:not(.reduced) [data-reveal].in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* ========================================
+   Scene 0: Hero
+   ======================================== */
+
+.sc-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 90px 24px 64px;
+  overflow: hidden;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1020px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-copy .eyebrow {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--primary-dim);
+  border: 1px solid rgba(0, 240, 160, 0.35);
+  border-radius: 999px;
+  padding: 6px 16px;
+  margin-bottom: 20px;
+}
+
+.hero-copy h1 {
+  font-size: clamp(32px, 4.6vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 18px;
+}
+
+.hero-copy .tagline {
+  font-size: 17px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 32px;
+  max-width: 440px;
+}
+
+/* one shared badge rule (style.css only styles it per-section) */
+.store-badge {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.store-badge:hover {
+  transform: scale(1.05);
+}
+
+.store-badge img {
+  height: 54px;
+  width: auto;
+}
+
+.hero-visual {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-poster {
+  width: min(320px, 76vw);
+  height: auto;
+  border-radius: 26px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 60px rgba(0, 240, 160, 0.12);
+  transform: rotateY(-12deg) rotateX(4deg) rotateZ(1.5deg);
+}
+
+html.js:not(.reduced) .sc-hero .hero-poster {
+  transform: rotateY(calc(-12deg + var(--p, 0) * 10deg)) rotateX(4deg)
+    rotateZ(1.5deg) translateY(calc(var(--p, 0) * -40px));
+}
+
+/* Hero background: glow orbs + floating PFC chips on depth layers */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* soft glows via gradient falloff — no filter:blur paint cost */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.orb-1 {
+  width: 640px;
+  height: 640px;
+  top: -18%;
+  right: -12%;
+  background: radial-gradient(circle, rgba(0, 240, 160, 0.16) 0%, rgba(0, 240, 160, 0) 68%);
+}
+
+.orb-2 {
+  width: 520px;
+  height: 520px;
+  bottom: -20%;
+  left: -14%;
+  background: radial-gradient(circle, rgba(78, 205, 196, 0.12) 0%, rgba(78, 205, 196, 0) 68%);
+}
+
+.chip-layer {
+  position: absolute;
+  inset: 0;
+}
+
+html.js:not(.reduced) .layer-1 {
+  transform: translateY(calc(var(--p, 0) * -120px));
+}
+
+html.js:not(.reduced) .layer-2 {
+  transform: translateY(calc(var(--p, 0) * -70px));
+}
+
+html.js:not(.reduced) .layer-3 {
+  transform: translateY(calc(var(--p, 0) * -30px));
+}
+
+.chip {
+  position: absolute;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  animation: chip-float 7s ease-in-out infinite alternate;
+}
+
+.chip-p {
+  color: var(--protein);
+  top: 16%;
+  left: 4%;
+}
+
+.chip-c {
+  color: var(--carbs);
+  bottom: 18%;
+  right: 6%;
+  animation-delay: -2.5s;
+}
+
+.chip-kcal {
+  color: var(--calories);
+  top: 24%;
+  right: 10%;
+  animation-delay: -1.2s;
+}
+
+.chip-f {
+  color: var(--fat);
+  bottom: 26%;
+  left: 8%;
+  animation-delay: -4s;
+}
+
+.chip-goal {
+  color: var(--primary);
+  top: 62%;
+  left: 44%;
+  animation-delay: -5.5s;
+}
+
+@keyframes chip-float {
+  from {
+    translate: 0 -8px;
+  }
+  to {
+    translate: 0 10px;
+  }
+}
+
+.scroll-cue {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  z-index: 2;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.cue-dot {
+  display: block;
+  width: 4px;
+  height: 26px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--primary), transparent);
+  animation: cue-slide 1.6s ease-in-out infinite;
+}
+
+@keyframes cue-slide {
+  0% {
+    transform: translateY(-4px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+}
+
+html:not(.js) .scroll-cue,
+html.reduced .scroll-cue {
+  display: none;
+}
+
+/* ========================================
+   Scene 1: Pain tunnel (pinned Z fly-through)
+   Default: static stacked cards. html.js: 3D tunnel.
+   ======================================== */
+
+.sc-tunnel {
+  padding: 72px 24px;
+}
+
+.tunnel-title {
+  text-align: center;
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+
+.tunnel-cards {
+  max-width: 520px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+
+.pain-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 22px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+}
+
+.pain-card .pain-icon {
+  flex-shrink: 0;
+}
+
+.pain-card p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.pain-card strong {
+  color: var(--calories);
+}
+
+/* JS-enabled 3D tunnel */
+html.js:not(.reduced) .sc-tunnel {
+  height: 380vh;
+  padding: 0;
+  position: relative;
+}
+
+html.js:not(.reduced) .tunnel-view {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  perspective: 950px;
+  background: var(--bg);
+}
+
+/* glow deepens with progress via opacity only (compositor-friendly) */
+html.js:not(.reduced) .tunnel-view::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 55% at 50% 55%,
+    rgba(0, 240, 160, 0.1),
+    transparent 75%
+  );
+  opacity: var(--p, 0);
+  pointer-events: none;
+}
+
+html.js:not(.reduced) .tunnel-title {
+  position: absolute;
+  top: 11vh;
+  top: 11svh;
+  left: 24px;
+  right: 24px;
+  margin: 0;
+  z-index: 3;
+  opacity: calc(1.15 - var(--p, 0) * 2.6);
+}
+
+html.js:not(.reduced) .tunnel-cards {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  display: block;
+  transform-style: preserve-3d;
+}
+
+html.js:not(.reduced) .pain-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(420px, 82vw);
+  margin: 0;
+  /* card i travels from deep Z toward (and past) the camera as --p scrubs */
+  --zn: calc(var(--p, 0) * 4200 - 500 - var(--i) * 750);
+  transform: translate3d(
+      calc(-50% + var(--x, 0px)),
+      calc(-50% + var(--y, 0px)),
+      calc(var(--zn) * 1px)
+    )
+    rotateY(var(--ry, 0deg));
+  /* fade-out completes at zn=760 so the last card (pc5) stays visible
+     until the pin releases (zn(pc5)=700 at p=1) — no blank tail */
+  opacity: min(calc((var(--zn) + 1600) / 900), calc((760 - var(--zn)) / 320));
+}
+
+/* style.css .pain-icon assumes the old stacked .pain-item layout */
+.pain-card .pain-icon {
+  margin-bottom: 0;
+}
+
+.pc1 {
+  --i: 0;
+  --x: -150px;
+  --y: -50px;
+  --ry: 9deg;
+}
+
+.pc2 {
+  --i: 1;
+  --x: 150px;
+  --y: 55px;
+  --ry: -8deg;
+}
+
+.pc3 {
+  --i: 2;
+  --x: -140px;
+  --y: 60px;
+  --ry: 8deg;
+}
+
+.pc4 {
+  --i: 3;
+  --x: 145px;
+  --y: -55px;
+  --ry: -8deg;
+}
+
+.pc5 {
+  --i: 4;
+  --x: 0px;
+  --y: 0px;
+  --ry: 0deg;
+}
+
+/* ========================================
+   Scene 2: Transformation
+   ======================================== */
+
+.sc-transform {
+  position: relative;
+  padding: 140px 24px;
+  text-align: center;
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 50%,
+    rgba(0, 240, 160, 0.08),
+    transparent 70%
+  );
+}
+
+.transform-inner h2 {
+  font-size: clamp(28px, 5.5vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.transform-inner p {
+  font-size: 17px;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+html.js:not(.reduced) .transform-inner[data-reveal] {
+  transform: translateY(28px) scale(0.92);
+}
+
+html.js:not(.reduced) .transform-inner[data-reveal].in-view {
+  transform: none;
+}
+
+/* ========================================
+   Scene 3: Feature showcase (alternating 3D scrub)
+   ======================================== */
+
+.sc-feature {
+  padding: 90px 24px;
+}
+
+.feat-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.sc-feature.rev .feat-inner {
+  grid-template-columns: 1.1fr 1fr;
+}
+
+.sc-feature.rev .feat-visual {
+  order: 2;
+}
+
+.sc-feature.rev .feat-copy {
+  order: 1;
+}
+
+.feat-visual {
+  margin: 0;
+  perspective: 900px;
+  display: flex;
+  justify-content: center;
+}
+
+.feat-visual img {
+  width: min(300px, 76vw);
+  height: auto;
+  border-radius: 22px;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.55);
+}
+
+/* Scrub tilt: card yaws as it crosses the viewport (edge factor 0.5 - p) */
+html.js:not(.reduced) .sc-feature .feat-visual img {
+  transform: rotateY(calc((0.5 - var(--p, 0.5)) * 36deg))
+    translateY(calc((0.5 - var(--p, 0.5)) * 70px));
+}
+
+html.js:not(.reduced) .sc-feature.rev .feat-visual img {
+  transform: rotateY(calc((var(--p, 0.5) - 0.5) * 36deg))
+    translateY(calc((0.5 - var(--p, 0.5)) * 70px));
+}
+
+.feat-label {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  border-radius: 999px;
+  padding: 5px 14px;
+  margin-bottom: 16px;
+}
+
+.lb-protein {
+  color: var(--protein);
+  background: rgba(0, 240, 160, 0.1);
+}
+
+.lb-calories {
+  color: var(--calories);
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.lb-fat {
+  color: var(--fat);
+  background: rgba(78, 205, 196, 0.1);
+}
+
+.lb-carbs {
+  color: var(--carbs);
+  background: rgba(255, 217, 61, 0.1);
+}
+
+.feat-copy h2 {
+  font-size: clamp(26px, 3.6vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.feat-copy > p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin-bottom: 20px;
+}
+
+.feat-points {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.feat-points li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.feat-points li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: 800;
+}
+
+/* Voice demo bubbles */
+.voice-demo {
+  width: min(320px, 80vw);
+  display: grid;
+  gap: 14px;
+}
+
+.vb {
+  border-radius: 18px;
+  padding: 14px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.vb.user {
+  justify-self: end;
+  background: linear-gradient(135deg, var(--primary), #00c88a);
+  color: #00250f;
+  border-bottom-right-radius: 6px;
+}
+
+.vb.app {
+  justify-self: start;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-bottom-left-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vb.app svg {
+  color: var(--primary);
+}
+
+.vb.card {
+  justify-self: start;
+  background: var(--surface);
+  border: 1px solid rgba(0, 240, 160, 0.35);
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* staggered entrance keyed off the shared [data-reveal]/.in-view mechanism */
+html.js:not(.reduced) .voice-demo .vb {
+  opacity: 0;
+  transform: translateY(16px) scale(0.96);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+html.js:not(.reduced) .voice-demo.in-view .vb.user {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.1s;
+}
+
+html.js:not(.reduced) .voice-demo.in-view .vb.app {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.55s;
+}
+
+html.js:not(.reduced) .voice-demo.in-view .vb.card {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.95s;
+}
+
+/* ========================================
+   Stats bar
+   ======================================== */
+
+.sc-stats {
+  text-align: center;
+}
+
+.stats-note {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+/* ========================================
+   More features + gallery
+   ======================================== */
+
+.more-features {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 80px 24px 64px;
+}
+
+.more-features .features-grid {
+  margin-bottom: 48px;
+}
+
+/* ========================================
+   Pricing
+   ======================================== */
+
+.sc-pricing {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.price-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 380px));
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.price-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 32px 28px;
+  position: relative;
+}
+
+.price-card.premium {
+  border-color: rgba(0, 240, 160, 0.5);
+  box-shadow: 0 0 50px rgba(0, 240, 160, 0.12);
+}
+
+.badge-pill {
+  position: absolute;
+  top: -13px;
+  right: 22px;
+  background: linear-gradient(135deg, var(--primary), #4ecdc4);
+  color: #00250f;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 5px 14px;
+}
+
+.price-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.price-card .price {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+.price-card.premium .price {
+  background: linear-gradient(135deg, var(--primary), #4ecdc4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.price-card .price .per {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  -webkit-text-fill-color: var(--text-tertiary);
+}
+
+.price-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.price-card li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.price-card li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.price-note {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-bottom: 28px;
+}
+
+.price-table-wrap {
+  max-width: 640px;
+  margin: 0 auto 8px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0 20px;
+}
+
+.price-table-wrap summary {
+  cursor: pointer;
+  padding: 16px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  list-style: none;
+}
+
+.price-table-wrap summary::-webkit-details-marker {
+  display: none;
+}
+
+.price-table-wrap summary::after {
+  content: " +";
+}
+
+.price-table-wrap[open] summary::after {
+  content: " −";
+}
+
+.table-scroll {
+  overflow-x: auto;
+  padding-bottom: 16px;
+}
+
+.price-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.price-table-wrap th,
+.price-table-wrap td {
+  padding: 10px 12px;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.price-table-wrap th {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.price-table-wrap td:last-child {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ========================================
+   FAQ
+   ======================================== */
+
+.faq {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 72px 24px 80px;
+}
+
+.faq details {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  padding: 0 20px;
+}
+
+.faq summary {
+  cursor: pointer;
+  padding: 18px 32px 18px 0;
+  font-size: 15px;
+  font-weight: 700;
+  list-style: none;
+  position: relative;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.faq details[open] summary::after {
+  content: "−";
+}
+
+.faq details p {
+  padding-bottom: 18px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ========================================
+   Final CTA
+   ======================================== */
+
+.sc-final {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-icon {
+  width: 110px;
+  height: 110px;
+  border-radius: 26px;
+  box-shadow: 0 16px 48px rgba(0, 240, 160, 0.25);
+  margin-bottom: 28px;
+}
+
+html.js:not(.reduced) .sc-final .cta-icon {
+  transform: scale(calc(0.7 + min(var(--p, 0), 0.5) * 0.6));
+}
+
+/* ========================================
+   Floating mobile CTA
+   ======================================== */
+
+.float-cta {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  z-index: 250;
+  background: var(--primary);
+  color: #00250f !important;
+  font-size: 15px;
+  font-weight: 800;
+  padding: 14px 28px;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(0, 240, 160, 0.35);
+  transform: translate(-50%, 120px);
+  visibility: hidden; /* keep the off-screen link out of the focus order */
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+    visibility 0s 0.35s;
+}
+
+html.js .float-cta.show {
+  transform: translate(-50%, 0);
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+html:not(.js) .float-cta,
+html.reduced .float-cta {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .float-cta {
+    display: none;
+  }
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .hero-copy .tagline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-visual {
+    order: 2;
+  }
+
+  .feat-inner,
+  .sc-feature.rev .feat-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    text-align: center;
+  }
+
+  .sc-feature.rev .feat-visual {
+    order: 0;
+  }
+
+  .sc-feature.rev .feat-copy {
+    order: 1;
+  }
+
+  .feat-points {
+    justify-items: center;
+  }
+
+  .feat-points li {
+    text-align: left;
+  }
+
+  .voice-demo {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .sp {
+    display: inline;
+  }
+
+  .sc-hero {
+    padding-top: 72px;
+  }
+
+  .chip {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  .chip-goal {
+    display: none;
+  }
+
+  html.js:not(.reduced) .pain-card {
+    width: min(340px, 84vw);
+  }
+
+  .pc1 {
+    --x: -34px;
+  }
+
+  .pc2 {
+    --x: 34px;
+  }
+
+  .pc3 {
+    --x: -30px;
+  }
+
+  .pc4 {
+    --x: 32px;
+  }
+
+  .price-cards {
+    grid-template-columns: minmax(0, 420px);
+  }
+
+  .sc-feature {
+    padding: 64px 20px;
+  }
+
+  .sc-transform {
+    padding: 100px 24px;
+  }
+
+  /* keep room for the floating CTA */
+  .site-footer {
+    padding-bottom: 88px;
+  }
+}

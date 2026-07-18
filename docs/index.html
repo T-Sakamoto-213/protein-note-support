@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>プロテインノート | もう怒られない、やさしいAIの栄養管理・筋トレ記録アプリ</title>
+    <meta name="description" content="もう怒られない。写真を撮るだけ・話すだけ・ワンタップでタンパク質と栄養を自動記録。やさしいAIコーチが褒めて続けさせてくれる無料のiOSアプリ。696食品データベース・60種目以上の筋トレ対応。" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://protein-note.theslopebook.jp/" />
+    <link rel="sitemap" type="application/xml" href="sitemap.xml" />
+    <meta name="apple-itunes-app" content="app-id=6748221439" />
+
+    <!-- OGP -->
+    <meta property="og:site_name" content="プロテインノート" />
+    <meta property="og:title" content="もう怒られない。やさしいAIの栄養管理 | プロテインノート" />
+    <meta property="og:description" content="写真を撮るだけ・話すだけ・ワンタップで栄養を自動記録。やさしいAIコーチが褒めて続けさせてくれる無料のiOS栄養管理・筋トレアプリ。" />
+    <meta property="og:image" content="https://protein-note.theslopebook.jp/images/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://protein-note.theslopebook.jp/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="もう怒られない。やさしいAIの栄養管理 | プロテインノート" />
+    <meta name="twitter:description" content="写真を撮るだけ・話すだけ・ワンタップで栄養を自動記録。やさしいAIコーチが褒めて続けさせてくれる無料のiOS栄養管理・筋トレアプリ。" />
+    <meta name="twitter:image" content="https://protein-note.theslopebook.jp/images/og-image.jpg" />
+
+    <link rel="icon" href="images/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="images/icon-180.png" />
+    <link rel="preload" as="image" href="images/hero-home.jpg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/lp.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "プロテインノート",
+      "alternateName": "Protein Note",
+      "operatingSystem": "iOS",
+      "applicationCategory": "HealthApplication",
+      "description": "写真を撮るだけ・話すだけ・ワンタップでタンパク質と栄養を自動記録。やさしいAIコーチが継続をサポートする無料の栄養管理・筋トレ記録アプリ。",
+      "url": "https://protein-note.theslopebook.jp/",
+      "image": "https://protein-note.theslopebook.jp/images/icon-512.png",
+      "screenshot": "https://protein-note.theslopebook.jp/images/hero-home.jpg",
+      "installUrl": "https://apps.apple.com/jp/app/id6748221439",
+      "featureList": "AI写真認識によるPFC自動計算, ボイスアシスタントによる音声記録, ワンタップ記録, 食事フォトログ, 筋トレ記録(60種目以上), AIコーチ, HealthKit連携(歩数・体重), 統計・グラフ, カレンダー, コミュニティ, バッジ・ストリーク",
+      "offers": [
+        { "@type": "Offer", "price": "0", "priceCurrency": "JPY", "description": "基本機能は無料" },
+        { "@type": "Offer", "price": "280", "priceCurrency": "JPY", "description": "プレミアム 月額280円（税込）・初月無料" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "無料で使えますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "はい。記録・筋トレ・統計などの基本機能は無料です。AI写真認識は月30回、ボイスアシスタントは1日1回まで無料で使えます。" }
+        },
+        {
+          "@type": "Question",
+          "name": "プレミアムプランの料金はいくらですか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "月額280円（税込）で、初月は無料です。AI写真認識が月180回、ボイスアシスタントが月200回に増え、広告も非表示になります。いつでも解約できます。" }
+        },
+        {
+          "@type": "Question",
+          "name": "アカウント登録は必要ですか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不要です。ゲストモードで今すぐ始められます。ゲストモードのデータは端末内にのみ保存されます。" }
+        },
+        {
+          "@type": "Question",
+          "name": "食事の写真はどこに保存されますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "食事フォトログの写真は端末内にのみ保存されます。AI認識を実行したときだけ、その写真が認識処理のため外部AIサービスに送信されます。" }
+        },
+        {
+          "@type": "Question",
+          "name": "「怒られない」とはどういう意味ですか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "多くの栄養管理アプリはカロリーオーバーを警告しますが、プロテインノートのAIコーチはまず頑張りを認めて褒めます。性格の違う5人のコーチから選べます。" }
+        },
+        {
+          "@type": "Question",
+          "name": "声だけで記録できますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "できます。「ベンチ80キロ10回」「鶏むね肉200g食べた」のように話すだけで、筋トレも食事も記録できます。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Apple ヘルスケア（HealthKit）と連携できますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "できます。歩数・歩行距離・体重をヘルスケアから自動取得し、消費カロリーの計算や体重グラフに反映されます。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Android版はありますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "現在はiOS版のみ提供しています。" }
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="inner">
+        <a href="./" class="logo">
+          <img src="images/icon.png" alt="プロテインノート" width="32" height="32" />
+          Protein Note
+        </a>
+        <nav>
+          <a href="#features">機能</a>
+          <a href="#pricing">料金</a>
+          <a href="#faq">FAQ</a>
+          <a href="support.html">サポート</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Scene 0: Hero -->
+      <section class="sc-hero" data-scene data-exit>
+        <div class="hero-bg" aria-hidden="true">
+          <span class="orb orb-1"></span>
+          <span class="orb orb-2"></span>
+          <div class="chip-layer layer-1">
+            <span class="chip chip-p">P 88.8g</span>
+            <span class="chip chip-c">C 246.8g</span>
+          </div>
+          <div class="chip-layer layer-2">
+            <span class="chip chip-kcal">612 kcal</span>
+          </div>
+          <div class="chip-layer layer-3">
+            <span class="chip chip-f">F 33.0g</span>
+            <span class="chip chip-goal">目標達成！</span>
+          </div>
+        </div>
+        <div class="hero-inner">
+          <div class="hero-copy" data-reveal>
+            <p class="eyebrow">タンパク質、足りていますか？</p>
+            <h1>もう怒られない。<br />やさしいAIと、<span class="grad">続く栄養管理。</span></h1>
+            <p class="tagline">
+              撮るだけ、話すだけ、ワンタップ。3秒で記録して、AIコーチがあなたの頑張りを褒めてくれる。だから、続く。
+            </p>
+            <a
+              href="https://apps.apple.com/jp/app/id6748221439"
+              class="store-badge"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83"
+                alt="App Storeからダウンロード"
+                width="157"
+                height="54"
+              />
+            </a>
+            <p class="hero-sub">無料ではじめる・アカウント登録不要・初月無料でプレミアムも試せる</p>
+          </div>
+          <div class="hero-visual">
+            <img
+              src="images/hero-home.jpg"
+              alt="プロテインノートのホーム画面。今日のタンパク質摂取量と目標達成率をリングで表示"
+              class="hero-poster"
+              width="750"
+              height="1623"
+              fetchpriority="high"
+            />
+          </div>
+        </div>
+        <div class="scroll-cue" aria-hidden="true"><span class="cue-dot"></span>スクロールして体験</div>
+      </section>
+
+      <!-- Scene 1: Pain tunnel (pinned 3D fly-through) -->
+      <section class="sc-tunnel" data-scene data-pin aria-labelledby="pain-title">
+        <div class="tunnel-view">
+          <h2 id="pain-title" class="tunnel-title">栄養管理アプリ、<br class="sp" />こんな理由でやめませんでしたか？</h2>
+          <div class="tunnel-cards">
+            <div class="pain-card pc1">
+              <span class="pain-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5-2 4-2 4 2 4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              </span>
+              <p>食事の記録が<strong>面倒で続かない</strong></p>
+            </div>
+            <div class="pain-card pc2">
+              <span class="pain-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </span>
+              <p>タンパク質が<strong>足りてるかわからない</strong></p>
+            </div>
+            <div class="pain-card pc3">
+              <span class="pain-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              </span>
+              <p>筋トレと食事を<strong>別アプリで管理</strong>するのが手間</p>
+            </div>
+            <div class="pain-card pc4">
+              <span class="pain-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg>
+              </span>
+              <p>完璧じゃない食事のたびに、<strong>罪悪感を感じてしまう</strong></p>
+            </div>
+            <div class="pain-card pc5">
+              <span class="pain-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              </span>
+              <p>ちゃんと頑張ってるのに、<strong>アプリに怒られて凹む</strong></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scene 2: Transformation -->
+      <section class="sc-transform" data-scene>
+        <div class="transform-inner" data-reveal>
+          <h2>プロテインノートは、<span class="grad">怒りません。</span></h2>
+          <p>
+            完璧じゃない日も、記録したことをまず褒める。<br />
+            継続を支える、やさしいAIコーチです。
+          </p>
+        </div>
+      </section>
+
+      <!-- Scene 3: Feature showcase -->
+      <div id="features">
+        <section class="sc-feature" data-scene>
+          <div class="feat-inner">
+            <figure class="feat-visual">
+              <img src="images/feature-ai-photo.jpg" alt="AI写真認識画面。サラダの写真からタンパク質・カロリー・脂質・炭水化物を自動推定" width="720" height="1558" loading="lazy" />
+            </figure>
+            <div class="feat-copy" data-reveal>
+              <p class="feat-label lb-calories">AI写真認識</p>
+              <h2>撮るだけで、<span class="grad">PFC自動計算。</span></h2>
+              <p>
+                食事の写真を撮るだけで、AIが食品を識別してタンパク質・カロリー・脂質・炭水化物を数秒で記録。市販品はバーコードを読み取るだけ。
+              </p>
+              <ul class="feat-points">
+                <li>複数の食品も一括で認識</li>
+                <li>バーコード読み取りにも対応</li>
+                <li>696食品のデータベースから検索もできる</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="sc-feature rev voice" data-scene>
+          <div class="feat-inner">
+            <div class="feat-visual">
+              <div class="voice-demo" data-reveal>
+                <p class="vb user">🎙️「ベンチ80キロ10回」</p>
+                <p class="vb app">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  記録しました
+                </p>
+                <p class="vb card">ベンチプレス&nbsp;&nbsp;80kg × 10回</p>
+              </div>
+            </div>
+            <div class="feat-copy" data-reveal>
+              <p class="feat-label lb-carbs">ボイスアシスタント</p>
+              <h2>「ベンチ80キロ10回」<br /><span class="grad">って言うだけ。</span></h2>
+              <p>
+                声だけで食事も筋トレも記録完了。トレーニング中でも、料理中でも、ハンズフリー。音声は端末内でテキストに変換されるから安心です。
+              </p>
+              <ul class="feat-points">
+                <li>「鶏むね肉200g食べた」で食事を記録</li>
+                <li>スマホを触れない場面でも記録が途切れない</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="sc-feature" data-scene>
+          <div class="feat-inner">
+            <figure class="feat-visual">
+              <img src="images/feature-goal.jpg" alt="あなた専用のタンパク質プラン画面。1日の目標量を体重と運動量から自動計算" width="720" height="1558" loading="lazy" />
+            </figure>
+            <div class="feat-copy" data-reveal>
+              <p class="feat-label lb-protein">あなた専用の目標</p>
+              <h2>必要なタンパク質量を、<span class="grad">自動計算。</span></h2>
+              <p>
+                体重・目標・運動量から、あなたに必要な1日のタンパク質量を約1分で自動算出。厚生労働省の食事摂取基準とISSNの推奨値に基づいています。
+              </p>
+              <ul class="feat-points">
+                <li>減量・増量・維持の目標に合わせて調整</li>
+                <li>あとは毎日、リングを満たすだけ</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="sc-feature rev" data-scene>
+          <div class="feat-inner">
+            <figure class="feat-visual">
+              <img src="images/feature-workout.jpg" alt="筋トレ記録画面。ワークアウトの種目・セット・テンプレートを管理" width="720" height="1558" loading="lazy" />
+            </figure>
+            <div class="feat-copy" data-reveal>
+              <p class="feat-label lb-calories">筋トレ記録</p>
+              <h2>筋トレも、<span class="grad">同じアプリで。</span></h2>
+              <p>
+                60種目以上に対応。重量・レップ・セットの記録、お気に入りのテンプレート、レストタイマー、部位別の分析まで。食事と筋トレの管理がこれ1つで完結します。
+              </p>
+              <ul class="feat-points">
+                <li>テンプレートでいつものメニューを一発登録</li>
+                <li>推定消費カロリーも自動計算</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="sc-feature" data-scene>
+          <div class="feat-inner">
+            <figure class="feat-visual">
+              <img src="images/feature-ai-coach.jpg" alt="AIコーチとのチャット画面。食事の相談に毎日答えてくれる" width="720" height="1558" loading="lazy" />
+            </figure>
+            <div class="feat-copy" data-reveal>
+              <p class="feat-label lb-fat">AIコーチ</p>
+              <h2>「今日も頑張ったね」<br />から始まる<span class="grad">継続。</span></h2>
+              <p>
+                記録をもとに毎日アドバイス。「明日の朝何食べればいい？」と相談もできる。甘め〜厳しめ、性格の違う5人のコーチから選べます。
+              </p>
+              <ul class="feat-points">
+                <li>まず褒める。だから凹まない</li>
+                <li>栄養もトレーニングも相談できる</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="sc-feature rev" data-scene>
+          <div class="feat-inner">
+            <figure class="feat-visual">
+              <img src="images/feature-stats.jpg" alt="統計画面。週間スコア・90日間の達成マップ・PFCバランスを可視化" width="720" height="1558" loading="lazy" />
+            </figure>
+            <div class="feat-copy" data-reveal>
+              <p class="feat-label lb-protein">統計・可視化</p>
+              <h2>続けた分だけ、<span class="grad">見えてくる。</span></h2>
+              <p>
+                週間スコア、90日間の達成マップ、PFCバランス。頑張りが見えるから、続けたくなる。バッジとストリークが継続を後押しします。
+              </p>
+              <ul class="feat-points">
+                <li>体重・歩数もグラフで一目瞭然</li>
+                <li>連続記録ストリークで習慣化</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Stats bar -->
+      <section class="stats-bar sc-stats" data-scene data-reveal>
+        <div class="inner">
+          <div class="stat-item">
+            <span class="stat-number">3秒</span>
+            <span class="stat-label">で記録完了</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-count="696">696</span>
+            <span class="stat-label">食品データベース</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-count="60" data-suffix="+">60+</span>
+            <span class="stat-label">筋トレ種目</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">0円</span>
+            <span class="stat-label">で始められる</span>
+          </div>
+        </div>
+        <p class="stats-note">歩数・体重はApple ヘルスケアから自動連携。</p>
+      </section>
+
+      <!-- More features + gallery -->
+      <section class="more-features" id="screenshots">
+        <h2 class="section-title">まだまだ、できること。</h2>
+        <div class="features-grid">
+          <div class="feature-card accent-primary" data-reveal>
+            <span class="icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </span>
+            <h3>ワンタップ記録</h3>
+            <p>いつものプロテインや朝食は、一度登録すれば次からワンタップで記録完了。</p>
+          </div>
+          <div class="feature-card accent-calories" data-reveal>
+            <span class="icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </span>
+            <h3>食事フォトログ</h3>
+            <p>忙しい時は撮って後で登録。写真は端末の中だけに保存されます。（v5.9新機能）</p>
+          </div>
+          <div class="feature-card accent-carbs" data-reveal>
+            <span class="icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5v14"/><path d="M8 5v14"/><path d="M12 5v14"/><path d="M17 5v14"/><path d="M21 5v14"/></svg>
+            </span>
+            <h3>バーコード読み取り</h3>
+            <p>市販品はバーコードをかざすだけで栄養成分を自動取得。</p>
+          </div>
+          <div class="feature-card accent-fat" data-reveal>
+            <span class="icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </span>
+            <h3>ヘルスケア連携</h3>
+            <p>歩数・歩行距離・体重をHealthKitから自動取得。消費カロリーも自動計算。</p>
+          </div>
+          <div class="feature-card accent-primary" data-reveal>
+            <span class="icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </span>
+            <h3>友達とつながる</h3>
+            <p>フレンドコードで友達を追加。ワークアウトにリアクションを送り合える。</p>
+          </div>
+          <div class="feature-card accent-carbs" data-reveal>
+            <span class="icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <h3>バッジ・ストリーク</h3>
+            <p>続けるほど貯まるバッジと連続記録。忙しい日は自動フリーズで守られる。</p>
+          </div>
+        </div>
+        <div class="screenshots-track" id="screenshotsTrack">
+          <img src="images/feature-calendar.jpg" alt="カレンダー画面。過去の食事記録と栄養素を日別に確認" width="720" height="1558" loading="lazy" />
+          <img src="images/feature-weight.jpg" alt="体重管理画面。ヘルスケアから体重を自動取得しグラフ表示" width="720" height="1558" loading="lazy" />
+          <img src="images/feature-steps.jpg" alt="ウォーキング画面。ヘルスケア連携で歩数と消費カロリーを表示" width="720" height="1558" loading="lazy" />
+        </div>
+        <div class="screenshots-dots" id="screenshotsDots"></div>
+      </section>
+
+      <!-- Use cases -->
+      <section class="use-cases">
+        <h2 class="section-title">こんな人におすすめ</h2>
+        <div class="use-cases-grid">
+          <div class="use-case-card" data-reveal>
+            <span class="use-case-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11"/><path d="M6.5 17.5h11"/><path d="M2 9.5h4.5v5H2z"/><path d="M17.5 9.5H22v5h-4.5z"/><path d="M6.5 4v16"/><path d="M17.5 4v16"/><line x1="11" y1="12" x2="13" y2="12"/></svg>
+            </span>
+            <h3>筋トレ・ボディメイク中の方</h3>
+            <p>PFCバランスと筋トレ記録を1つのアプリで完結。ワンタップ記録でプロテイン摂取も秒で管理。</p>
+          </div>
+          <div class="use-case-card" data-reveal>
+            <span class="use-case-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </span>
+            <h3>ダイエット中の方</h3>
+            <p>カロリー・脂質・炭水化物を可視化。体重推移グラフで変化を実感。AI写真認識で記録の手間ゼロ。</p>
+          </div>
+          <div class="use-case-card" data-reveal>
+            <span class="use-case-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </span>
+            <h3>健康管理をしたい方</h3>
+            <p>歩数・体重・栄養バランスをまとめて管理。やさしいAIが食事の偏りを分析してアドバイス。怒られません。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing -->
+      <section class="sc-pricing" id="pricing">
+        <h2 class="section-title">まずは無料で、<br class="sp" />ぜんぶの基本機能を。</h2>
+        <div class="price-cards">
+          <div class="price-card free" data-reveal>
+            <h3>無料プラン</h3>
+            <p class="price">¥0</p>
+            <ul>
+              <li>食事・筋トレ・体重・歩数の記録</li>
+              <li>統計・グラフ・カレンダー</li>
+              <li>AI写真認識 月30回</li>
+              <li>ボイスアシスタント 1日1回</li>
+              <li>AIアドバイス 1日1回</li>
+            </ul>
+          </div>
+          <div class="price-card premium" data-reveal>
+            <span class="badge-pill">初月無料</span>
+            <h3>プレミアム</h3>
+            <p class="price">¥280<span class="per">/月（税込）</span></p>
+            <ul>
+              <li>AI写真認識 月180回</li>
+              <li>ボイスアシスタント 月200回</li>
+              <li>コーチとチャット 1日20回</li>
+              <li>広告非表示・CSVエクスポート</li>
+              <li>カスタム食品・マイレシピ無制限</li>
+            </ul>
+          </div>
+        </div>
+        <p class="price-note">サブスクリプションはいつでも解約できます。</p>
+        <details class="price-table-wrap">
+          <summary>無料とプレミアムのくわしい比較を見る</summary>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th>機能</th><th>無料</th><th>プレミアム</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>AI写真認識</td><td>月30回</td><td>月180回</td></tr>
+                <tr><td>食事フォトログ</td><td>3件・7日保持</td><td>最大300枚</td></tr>
+                <tr><td>AIアドバイス</td><td>1日1回</td><td>1日5回</td></tr>
+                <tr><td>コーチとの会話</td><td>—</td><td>1日20回</td></tr>
+                <tr><td>ボイスアシスタント</td><td>1日1回</td><td>月200回</td></tr>
+                <tr><td>AI褒めコーチ</td><td>定型文</td><td>AI生成</td></tr>
+                <tr><td>カスタム食品</td><td>10個</td><td>無制限</td></tr>
+                <tr><td>マイレシピ</td><td>3個</td><td>無制限</td></tr>
+                <tr><td>カスタムテンプレート</td><td>3個</td><td>無制限</td></tr>
+                <tr><td>CSVエクスポート</td><td>—</td><td>利用可能</td></tr>
+                <tr><td>広告</td><td>あり</td><td>非表示</td></tr>
+                <tr><td>友達の上限</td><td>10人</td><td>無制限</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <div class="mid-cta">
+          <a
+            href="https://apps.apple.com/jp/app/id6748221439"
+            class="store-badge"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83"
+              alt="App Storeからダウンロード"
+              width="157"
+              height="54"
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="faq" id="faq">
+        <h2 class="section-title">よくある質問</h2>
+        <details>
+          <summary>無料で使えますか？</summary>
+          <p>はい。記録・筋トレ・統計などの基本機能は無料です。AI写真認識は月30回、ボイスアシスタントは1日1回まで無料で使えます。</p>
+        </details>
+        <details>
+          <summary>プレミアムプランの料金はいくらですか？</summary>
+          <p>月額280円（税込）で、初月は無料です。AI写真認識が月180回、ボイスアシスタントが月200回に増え、広告も非表示になります。いつでも解約できます。</p>
+        </details>
+        <details>
+          <summary>アカウント登録は必要ですか？</summary>
+          <p>不要です。ゲストモードで今すぐ始められます。ゲストモードのデータは端末内にのみ保存されます。</p>
+        </details>
+        <details>
+          <summary>食事の写真はどこに保存されますか？</summary>
+          <p>食事フォトログの写真は端末内にのみ保存されます。AI認識を実行したときだけ、その写真が認識処理のため外部AIサービスに送信されます。</p>
+        </details>
+        <details>
+          <summary>「怒られない」とはどういう意味ですか？</summary>
+          <p>多くの栄養管理アプリはカロリーオーバーを警告しますが、プロテインノートのAIコーチはまず頑張りを認めて褒めます。性格の違う5人のコーチから選べます。</p>
+        </details>
+        <details>
+          <summary>声だけで記録できますか？</summary>
+          <p>できます。「ベンチ80キロ10回」「鶏むね肉200g食べた」のように話すだけで、筋トレも食事も記録できます。</p>
+        </details>
+        <details>
+          <summary>Apple ヘルスケア（HealthKit）と連携できますか？</summary>
+          <p>できます。歩数・歩行距離・体重をヘルスケアから自動取得し、消費カロリーの計算や体重グラフに反映されます。</p>
+        </details>
+        <details>
+          <summary>Android版はありますか？</summary>
+          <p>現在はiOS版のみ提供しています。</p>
+        </details>
+      </section>
+
+      <!-- Final CTA -->
+      <section class="cta-section sc-final" data-scene data-enter>
+        <img src="images/icon-180.png" alt="プロテインノートのアプリアイコン" class="cta-icon" width="120" height="120" loading="lazy" />
+        <h2>今日の一食から、<br class="sp" />始めよう。</h2>
+        <p>
+          アカウント登録なし。30秒でスタート。<br />
+          あなたの頑張りを、ちゃんと褒めてくれるアプリです。
+        </p>
+        <a
+          href="https://apps.apple.com/jp/app/id6748221439"
+          class="store-badge"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83"
+            alt="App Storeからダウンロード"
+            width="157"
+            height="54"
+            loading="lazy"
+          />
+        </a>
+        <p class="cta-free">基本機能はすべて無料・初月無料でプレミアムも試せます</p>
+      </section>
+    </main>
+
+    <a class="float-cta" id="floatCta" href="https://apps.apple.com/jp/app/id6748221439" target="_blank" rel="noopener noreferrer">
+      App Storeで無料ダウンロード
+    </a>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="inner">
+        <nav>
+          <a href="terms.html">利用規約</a>
+          <a href="privacy.html">プライバシーポリシー</a>
+          <a href="privacy-en.html">Privacy Policy</a>
+          <a href="support.html">サポート</a>
+          <a href="support-en.html">Support</a>
+        </nav>
+        <p class="copyright">&copy; 2025-2026 Protein Note. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="js/lp.js" defer></script>
+  </body>
+</html>
