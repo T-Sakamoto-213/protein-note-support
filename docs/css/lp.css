@@ -1330,3 +1330,11 @@ html.reduced .float-cta {
   font-weight: 700;
   font-size: 14px;
 }
+
+/* Header fits with the guide link on small screens */
+@media (max-width: 480px) {
+  .site-header nav {
+    gap: 10px;
+    font-size: 12px;
+  }
+}
