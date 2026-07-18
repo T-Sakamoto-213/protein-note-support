@@ -18,6 +18,7 @@ docs/                          ← GitHub Pages のルート (main ブランチ 
 ├── support.html / support-en.html
 ├── sitemap.xml / llms.txt     # SEO / AI検索(AIO)用
 ├── robots.txt                 # ドメイン直下で配信される(AIクローラー許可+Sitemap)
+├── 2cf87dde98d34a11997337121a87b4ec.txt  # IndexNowキー(Bing即時インデックス用・削除しないこと)
 ├── images/                    # 最適化済み画像 (JPEG 720-750px幅・各150KB以下)
 ├── .nojekyll
 └── protein-note-support/      # 旧URL互換のリダイレクトスタブのみ(削除しないこと)

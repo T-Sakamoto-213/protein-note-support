@@ -6,6 +6,7 @@
 
 # Claude Code ローカルデータ
 .claude/
+CLAUDE.md
 
 # Logs / temp
 *.log
