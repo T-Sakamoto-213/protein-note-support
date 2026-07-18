@@ -66,3 +66,9 @@ VSCodeのLive Server(ポート5501設定済み)でも可。`docs/` をルート�
 - `llms.txt`: AI検索エンジン向けのアプリ要約。機能・料金変更時に更新
 - `robots.txt`: カスタムドメイン直下で配信されるため有効(AIクローラー明示許可+Sitemap宣言)。加えて **Google Search Console への登録・sitemap送信を推奨**
 - 画像更新時は `sips -s format jpeg -s formatOptions 70 --resampleWidth 720` で圧縮する
+
+## アクセス解析
+
+- GA4: 測定ID `G-S73XNQZCW0`(THE-SLOPEBOOK アカウント > protein-note プロパティ > ウェブストリーム「プロテインノートアプリ用 LP」)。全ページ(スタブ除く)の `</head>` 直前に gtag.js を設置
+- ページ追加時は gtag スニペットとフッターの Google Analytics 使用告知も忘れずに入れること
+- IndexNow: ページ追加・大幅更新時は `https://api.indexnow.org/indexnow` へ該当URLをPOSTして即時クロールを要求できる(キーは `docs/2cf87dde98d34a11997337121a87b4ec.txt`)
