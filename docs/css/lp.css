@@ -1226,3 +1226,107 @@ html.reduced .float-cta {
     padding-bottom: 88px;
   }
 }
+
+/* ========================================
+   Guide pages (docs/guide/)
+   ======================================== */
+
+.breadcrumb {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+}
+
+.breadcrumb a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--primary);
+}
+
+.page-content ol.steps {
+  list-style: none;
+  counter-reset: step;
+  padding: 0;
+  margin: 16px 0 28px;
+  display: grid;
+  gap: 14px;
+}
+
+.page-content ol.steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 40px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.page-content ol.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guide-table {
+  overflow-x: auto;
+  margin: 16px 0 28px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.guide-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.guide-table th,
+.guide-table td {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+
+.guide-table thead th {
+  border-top: none;
+  color: var(--text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.guide-note {
+  background: var(--surface);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 16px 0 28px;
+}
+
+.guide-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 44px;
+  font-weight: 700;
+  font-size: 14px;
+}

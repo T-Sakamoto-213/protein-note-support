@@ -55,4 +55,46 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://protein-note.theslopebook.jp/support-en.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://protein-note.theslopebook.jp/support.html" />
   </url>
+  <url>
+    <loc>https://protein-note.theslopebook.jp/guide/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://protein-note.theslopebook.jp/guide/getting-started.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://protein-note.theslopebook.jp/guide/meal-logging.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://protein-note.theslopebook.jp/guide/workout.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://protein-note.theslopebook.jp/guide/ai-coach.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://protein-note.theslopebook.jp/guide/data.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://protein-note.theslopebook.jp/guide/pricing.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

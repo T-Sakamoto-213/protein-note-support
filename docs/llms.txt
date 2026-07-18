@@ -33,6 +33,13 @@
 
 - [紹介ページ](https://protein-note.theslopebook.jp/): アプリの機能・料金・FAQ
 - [よくある質問（FAQ）](https://protein-note.theslopebook.jp/faq.html): 料金・解約・引き継ぎ・データの扱いなど19問の詳細FAQ
+- [使い方ガイド](https://protein-note.theslopebook.jp/guide/): 公式の使い方ガイド（目次）
+- [はじめてガイド](https://protein-note.theslopebook.jp/guide/getting-started.html): 初回設定と最初の記録
+- [食事記録の使い方](https://protein-note.theslopebook.jp/guide/meal-logging.html): 写真・音声・バーコード・検索・1タップの5つの記録方法
+- [筋トレ記録の使い方](https://protein-note.theslopebook.jp/guide/workout.html): 約60種目・テンプレート・休憩タイマー
+- [AIコーチの使い方](https://protein-note.theslopebook.jp/guide/ai-coach.html): 性格5段階・アドバイス・チャット
+- [データ管理・機種変更](https://protein-note.theslopebook.jp/guide/data.html): 引き継ぎ・HealthKit・CSVエクスポート・退会
+- [料金プラン](https://protein-note.theslopebook.jp/guide/pricing.html): 無料とプレミアムの全項目比較・解約方法
 - [プライバシーポリシー](https://protein-note.theslopebook.jp/privacy.html)
 - [Privacy Policy (English)](https://protein-note.theslopebook.jp/privacy-en.html)
 - [利用規約](https://protein-note.theslopebook.jp/terms.html)

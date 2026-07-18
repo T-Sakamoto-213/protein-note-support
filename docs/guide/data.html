@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>データ管理・機種変更の引き継ぎ｜HealthKit・CSV - プロテインノート</title>
+    <meta name="description" content="プロテインノートのデータ管理を解説。アカウント登録による機種変更時のデータ引き継ぎ、ゲストモードの注意点、ヘルスケア（HealthKit）連携で歩数・体重を自動取得、CSVエクスポート、通知設定、退会の方法。" />
+    <link rel="canonical" href="https://protein-note.theslopebook.jp/guide/data.html" />
+    <meta property="og:site_name" content="プロテインノート" />
+    <meta property="og:title" content="データ管理・機種変更の引き継ぎ｜HealthKit・CSV - プロテインノート" />
+    <meta property="og:description" content="プロテインノートのデータ管理を解説。アカウント登録による機種変更時のデータ引き継ぎ、ゲストモードの注意点、ヘルスケア（HealthKit）連携で歩数・体重を自動取得、CSVエクスポート、通知設定、退会の方法。" />
+    <meta property="og:image" content="https://protein-note.theslopebook.jp/images/og-image.jpg" />
+    <meta property="og:url" content="https://protein-note.theslopebook.jp/guide/data.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="../images/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../images/icon-180.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/lp.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ホーム",
+          "item": "https://protein-note.theslopebook.jp/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "使い方ガイド",
+          "item": "https://protein-note.theslopebook.jp/guide/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "データ管理",
+          "item": "https://protein-note.theslopebook.jp/guide/data.html"
+        }
+      ]
+    }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SD50LR5JYC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SD50LR5JYC');
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="inner">
+        <a href="../" class="logo">
+          <img src="../images/icon.png" alt="プロテインノート" width="32" height="32" />
+          Protein Note
+        </a>
+        <nav>
+          <a href="./">ガイド目次</a>
+          <a href="../faq.html">FAQ</a>
+          <a href="../">ホーム</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <nav class="breadcrumb" aria-label="パンくず"><a href="../">ホーム</a> › <a href="./">使い方ガイド</a> › <span>データ管理</span></nav>
+      <h1>データ管理・機種変更</h1>
+
+      <p class="support-lead">
+        記録データの保存のしくみ、機種変更時の引き継ぎ、ヘルスケア連携、エクスポート、退会までをまとめます。
+      </p>
+
+      <h2>ゲストモードとアカウントの違い</h2>
+      <div class="guide-table">
+        <table>
+          <thead>
+            <tr><th></th><th>ゲストモード</th><th>アカウント登録後</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>データの保存先</td><td>端末内のみ</td><td>クラウドに保存</td></tr>
+            <tr><td>機種変更・アプリ削除</td><td>データは失われる</td><td>ログインすれば引き継がれる</td></tr>
+            <tr><td>登録方法</td><td>—</td><td>設定 →「データを保持してアカウント登録」（Apple / Google連携に対応）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>機種変更でデータを引き継ぐ</h2>
+      <ol class="steps">
+        <li>旧端末で<strong>アカウント登録</strong>を済ませておきます（設定 →「データを保持してアカウント登録」）。</li>
+        <li>新端末にアプリをインストールし、<strong>同じアカウントでログイン</strong>します。</li>
+        <li>記録データが自動で引き継がれます。</li>
+      </ol>
+      <div class="guide-note">
+        <strong>注意:</strong> フォトログ（食事写真）はプライバシー保護のため端末内にのみ保存されており、機種変更では引き継がれません。栄養素などの記録データ自体はアカウントがあれば引き継がれます。
+      </div>
+
+      <h2>ヘルスケア（HealthKit）連携</h2>
+      <p>iPhoneのヘルスケアと連携すると、<strong>歩数</strong>を自動で取得できます。<strong>体重</strong>もヘルスケアから読み取れます（体重入力時に許可を求められます）。</p>
+      <p>連携がうまく動かないときは、iPhoneの「設定」→「プライバシーとセキュリティ」→「ヘルスケア」→「プロテインノート」で読み取り許可を確認してください。歩数目標は設定画面の「歩数目標（HealthKit）」から変更できます。</p>
+
+      <h2>CSVエクスポート（プレミアム）</h2>
+      <p>設定 → データ管理 →「食事記録をCSVエクスポート」から、記録をCSVファイルとして書き出せます。期間（直近◯日分 / 全期間）を選べるので、スプレッドシートでの自己分析や記録のバックアップに使えます。</p>
+
+      <h2>通知設定</h2>
+      <p>設定 → 通知設定から、次のリマインダーを個別にオン/オフ・時刻設定できます: 食事リマインダー（朝・昼・夜）/ 目標チェック通知 / ストリーク維持通知 / 週間レポート通知。</p>
+
+      <h2>テーマ（ライト/ダーク）</h2>
+      <p>設定 → アプリ設定からライトモード / ダークモードを切り替えられます。</p>
+
+      <h2>退会（アカウント削除）</h2>
+      <ul>
+        <li>設定画面下部の「<strong>退会</strong>」からアカウント削除をリクエストできます。サーバーに保存されたデータは合理的な期間内に削除されます。</li>
+        <li>ゲストモードの場合は「ゲストモードを終了」が表示されます。ゲストのデータは端末内のみのため、アプリを削除すれば消去されます。</li>
+        <li>プレミアム契約中の方は、退会とは別に<a href="pricing.html">サブスクリプションの解約</a>も必要です（アプリ削除・退会だけでは解約されません）。</li>
+      </ul>
+      <nav class="guide-nav"><a href="ai-coach.html">← AIコーチの使い方</a><a href="pricing.html">料金プラン →</a></nav>
+
+      <div class="mid-cta">
+        <p>プロテインノートは基本機能無料で使えます。</p>
+        <a href="https://apps.apple.com/jp/app/id6748221439" class="store-badge" target="_blank" rel="noopener noreferrer" data-cta="guide_data">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83" alt="App Storeからダウンロード" width="157" height="54" loading="lazy" />
+        </a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="inner">
+        <nav>
+          <a href="../">ホーム</a>
+          <a href="./">使い方ガイド</a>
+          <a href="../faq.html">よくある質問</a>
+          <a href="../support.html">サポート</a>
+          <a href="../terms.html">利用規約</a>
+          <a href="../privacy.html">プライバシーポリシー</a>
+        </nav>
+        <p class="copyright">本サイトはアクセス状況の把握のため Google Analytics を使用しています。</p>
+        <p class="copyright">&copy; 2025-2026 Protein Note. All rights reserved.</p>
+      </div>
+    </footer>
+    <script>
+      document.querySelectorAll('[data-cta]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (typeof gtag === 'function') {
+            gtag('event', 'cta_click', { cta_location: a.getAttribute('data-cta') });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
