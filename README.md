@@ -19,6 +19,7 @@ docs/                          ← GitHub Pages のルート (main ブランチ 
 ├── guide/                     # 使い方ガイド(目次+6テーマ・アプリ実装に基づく公式ドキュメント)
 ├── sitemap.xml / llms.txt     # SEO / AI検索(AIO)用
 ├── robots.txt                 # ドメイン直下で配信される(AIクローラー許可+Sitemap)
+├── favicon.ico                # 16/32/48px マルチ解像度(タグ宣言がなくてもブラウザが要求する)
 ├── 2cf87dde98d34a11997337121a87b4ec.txt  # IndexNowキー(Bing即時インデックス用・削除しないこと)
 ├── images/                    # 最適化済み画像 (JPEG 720-750px幅・各150KB以下)
 ├── .nojekyll
