@@ -218,6 +218,48 @@ function checkHardcodedStats(foodCount) {
   return problems;
 }
 
+
+/**
+ * サイトの発行者。全ページに同じものを載せる。
+ *
+ * 誰が出している数値なのかが機械的に読めないと、AIも検索エンジンも
+ * 引用元として扱いにくい。出典（文部科学省）とは別に、
+ * 掲載主体を明示するために置く。
+ */
+const ORGANIZATION_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'プロテインノート',
+  url: SITE,
+  logo: `${SITE}/images/icon-180.png`,
+  description:
+    'タンパク質を中心に、日々の食事とトレーニングを記録するiOSアプリ。日本食品標準成分表に基づく食品成分表を公開しています。',
+};
+
+/**
+ * 一覧ページの ItemList
+ *
+ * 「タンパク質が多い食品は？」に対して、順位つきの構造化データがあると
+ * リストそのものを引用できる。表を目で読ませるより確実。
+ */
+function itemListLd({ name, description, path, items, ordered }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name,
+    description,
+    url: `${SITE}${path}`,
+    numberOfItems: items.length,
+    itemListOrder: ordered ? 'https://schema.org/ItemListOrderDescending' : 'https://schema.org/ItemListUnordered',
+    itemListElement: items.map((it, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: it.name,
+      url: `${SITE}/foods/${encodeURI(it.__slug)}.html`,
+    })),
+  };
+}
+
 // ---------------------------------------------------------------------------
 // ユーティリティ
 // ---------------------------------------------------------------------------
@@ -253,7 +295,7 @@ function fmt(v, unit) {
 // 共通レイアウト
 // ---------------------------------------------------------------------------
 
-function layout({ title, description, canonicalPath, breadcrumb, body, depth = 1 }) {
+function layout({ title, description, canonicalPath, breadcrumb, body, depth = 1, jsonLd = [] }) {
   const up = '../'.repeat(depth);
   const crumbLd = {
     '@context': 'https://schema.org',
@@ -294,6 +336,10 @@ function layout({ title, description, canonicalPath, breadcrumb, body, depth = 1
     <script type="application/ld+json">
 ${JSON.stringify(crumbLd, null, 2)}
     </script>
+${jsonLd
+  .filter(Boolean)
+  .map((o) => `    <script type="application/ld+json">\n${JSON.stringify(o, null, 2)}\n    </script>`)
+  .join('\n')}
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=${GA_ID}"></script>
     <script>
@@ -436,11 +482,11 @@ function breakdownSection(item) {
 ${rows}
         </tbody>
         <tfoot>
-          <tr><th>合計</th><td>—</td><td>${totalG}g</td><td>—</td><td>—</td></tr>
+          <tr><th>計算に使った総重量</th><td>—</td><td>${totalG}g</td><td>—</td><td>—</td></tr>
         </tfoot>
       </table>
       </div>
-      <p class="food-disclaimer">100gあたりの値は、上の合計を総重量で割って換算したものです。レシピは標準的な構成の推定であり、店舗・家庭によって変動します。</p>`;
+      <p class="food-disclaimer">100gあたりの値は、上の材料の合計を総重量${totalG}gで割って換算したものです。この${totalG}gは計算の基準であり、ページ上部の「1食分の目安」とは別の数値です（1食分は一般的に提供される量の目安）。レシピは標準的な構成の推定であり、店舗・家庭によって変動します。</p>`;
 }
 
 function pfcBalance(item) {
@@ -463,6 +509,175 @@ function pfcBalance(item) {
         </tbody>
       </table>
       <p class="food-disclaimer">この比率は各栄養素から換算した値のため、記載のカロリーとは一致しない場合があります。</p>`;
+}
+
+
+/**
+ * 「答え」を先頭に置く一文を作る
+ *
+ * 検索でもAIの回答でも、聞かれているのは「この食品のタンパク質は何gか」で、
+ * 「このページには栄養成分が載っています」という説明ではない。
+ * 数値を含む文を本文の最初に置き、そこだけ読めば答えが完結するようにする。
+ */
+function answerLead(item, serving) {
+  const p = fmt(item.proteinPer100g, 'g');
+  const cal = fmt(item.caloriesPer100g, 'kcal');
+  const head = `${esc(item.name)}100gあたりのタンパク質は${p}、カロリーは${cal}、脂質は${fmt(item.fatPer100g, 'g')}、炭水化物は${fmt(item.carbsPer100g, 'g')}です。`;
+  const tail =
+    serving && serving !== 100
+      ? `1食分の目安${serving}gに換算すると、タンパク質${fmt((num(item.proteinPer100g) ?? 0) * serving / 100, 'g')}、カロリー${fmt((num(item.caloriesPer100g) ?? 0) * serving / 100, 'kcal')}です。`
+      : '';
+  return head + tail;
+}
+
+/**
+ * よくある質問（可視のQ&A）
+ *
+ * ■ なぜ入れるか
+ * 検索の入力も、AIへの質問も「卵のタンパク質は？」という問いの形で来る。
+ * ページが表と数値だけだと、問いと本文の言葉が噛み合わず引用されにくい。
+ * 事実だけで構成できるうえ、1ページ810字だった本文の薄さも同時に解消する。
+ *
+ * ■ 効能効果は書かない
+ * 「筋肉がつく」「痩せる」の類は景表法・薬機法に触れる。
+ * 書くのは成分表から機械的に導ける事実だけに限る。
+ *
+ * ■ FAQPage 構造化データは可視テキストと一致させる
+ * マークアップだけ置いて本文に無いQ&Aを書くのは規約違反。
+ * 同じ配列から本文とJSON-LDの両方を作ることで、ずれない構造にしている。
+ */
+function faqEntries(item, ctx) {
+  const { categoryName, categoryCount, rank } = ctx;
+  const serving = num(item.typicalServingG);
+  const p = num(item.proteinPer100g) ?? 0;
+  const cal = num(item.caloriesPer100g) ?? 0;
+  const list = [];
+
+  list.push({
+    q: `${item.name}のタンパク質は100gあたり何gですか？`,
+    a: `${fmt(p, 'g')}です。${FOOD_DATA_SOURCE}の収載値${item.seibunhyoNo ? `（食品番号 ${item.seibunhyoNo}）` : ''}です。`,
+  });
+
+  if (serving && serving !== 100) {
+    list.push({
+      q: `${item.name}1食分（${serving}g）のタンパク質とカロリーは？`,
+      a: `タンパク質${fmt((p * serving) / 100, 'g')}、カロリー${fmt((cal * serving) / 100, 'kcal')}です。100gあたりの値を${serving}gに換算しています。`,
+    });
+  }
+
+  list.push({
+    q: `${item.name}のカロリーは100gあたり何kcalですか？`,
+    a: `${fmt(cal, 'kcal')}です。脂質は${fmt(item.fatPer100g, 'g')}、炭水化物は${fmt(item.carbsPer100g, 'g')}です。`,
+  });
+
+  list.push({
+    q: `${item.name}は${categoryName}のなかでタンパク質が多いほうですか？`,
+    a: `当サイトが${categoryName}に収録している${categoryCount}品目のうち、100gあたりのタンパク質量は${rank}番目です。`,
+  });
+
+  // 材料が分かっているものは、その根拠も質問の形で置く
+  const recipe = RECIPES[item.name];
+  if (recipe && Array.isArray(recipe.ingredients)) {
+    list.push({
+      q: `${item.name}の栄養成分はどうやって計算していますか？`,
+      a: `${item.name}は${FOOD_DATA_SOURCE}に収載がないため、成分表に収載されている${recipe.ingredients
+        .map((i) => (SEIBUNHYO.get(i.no)?.name || i.name || '').replace(/\s+/g, ' ').trim())
+        .filter(Boolean)
+        .slice(0, 6)
+        .join('、')}などの材料の値から計算した参考値です。材料と分量はページ内の表に掲載しています。`,
+    });
+  }
+  return list;
+}
+
+function faqSection(entries) {
+  if (!entries.length) return '';
+  // 折りたたまない。details/summary は FAQ の定番だが、閉じた状態の本文は
+  // 読み手にもAIにも届きにくい。数行なので開いたまま置く。
+  return `      <h2>よくある質問</h2>
+      <div class="food-faq">
+${entries
+  .map(
+    (e) => `        <div class="food-faq-item">
+          <h3>${esc(e.q)}</h3>
+          <p>${esc(e.a)}</p>
+        </div>`,
+  )
+  .join('\n')}
+      </div>`;
+}
+
+function faqLd(entries) {
+  if (!entries.length) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: entries.map((e) => ({
+      '@type': 'Question',
+      name: e.q,
+      acceptedAnswer: { '@type': 'Answer', text: e.a },
+    })),
+  };
+}
+
+/**
+ * 栄養成分の構造化データ
+ *
+ * schema.org の NutritionInformation は Recipe の一部としてしか定義されていない。
+ * 材料の分かっている自社算出24件は本物のレシピなので Recipe で出せる。
+ * それ以外は Recipe を名乗ると実態と違う（材料も手順も無い）ため、
+ * ページそのものを説明する WebPage + 主題（Thing）として出す。
+ */
+function foodLd(item, ctx) {
+  const serving = num(item.typicalServingG);
+  const nutrition = {
+    '@type': 'NutritionInformation',
+    servingSize: '100g',
+    calories: `${num(item.caloriesPer100g) ?? 0} kcal`,
+    proteinContent: `${num(item.proteinPer100g) ?? 0} g`,
+    fatContent: `${num(item.fatPer100g) ?? 0} g`,
+    carbohydrateContent: `${num(item.carbsPer100g) ?? 0} g`,
+  };
+
+  const recipe = RECIPES[item.name];
+  if (recipe && Array.isArray(recipe.ingredients)) {
+    const total = recipe.ingredients.reduce((n, i) => n + (num(i.g) ?? 0), 0);
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Recipe',
+      name: item.name,
+      description: `${item.name}の栄養成分と、${FOOD_DATA_SOURCE}に基づく材料の内訳。`,
+      recipeCategory: ctx.categoryName,
+      recipeYield: total ? `${total}g` : undefined,
+      recipeIngredient: recipe.ingredients.map(
+        (i) => `${(SEIBUNHYO.get(i.no)?.name || i.name || '').replace(/\s+/g, ' ').trim()} ${i.g}g`,
+      ),
+      nutrition,
+      isBasedOn: 'https://fooddb.mext.go.jp/',
+    };
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `${item.name}の栄養成分`,
+    description: answerLead(item, serving).replace(/<[^>]+>/g, ''),
+    isPartOf: { '@type': 'WebSite', name: 'プロテインノート', url: SITE },
+    about: {
+      '@type': 'Thing',
+      name: item.name,
+      ...(item.seibunhyoNo
+        ? { identifier: { '@type': 'PropertyValue', name: '日本食品標準成分表 食品番号', value: item.seibunhyoNo } }
+        : {}),
+    },
+    mainEntity: nutrition,
+    citation: {
+      '@type': 'CreativeWork',
+      name: FOOD_DATA_SOURCE,
+      publisher: { '@type': 'GovernmentOrganization', name: '文部科学省' },
+      url: 'https://fooddb.mext.go.jp/',
+    },
+  };
 }
 
 function foodPage(item, ctx) {
@@ -495,11 +710,13 @@ ${related
       </ul>`
     : '';
 
+  const faq = faqEntries(item, ctx);
+
   const body = `      <nav class="breadcrumb" aria-label="パンくず"><a href="../">ホーム</a> › <a href="./">食品成分表</a> › <a href="category-${encodeURI(categorySlug)}.html">${esc(categoryName)}</a> › <span>${esc(item.name)}</span></nav>
       <h1>${esc(item.name)}の栄養成分</h1>
 
       <p class="support-lead">
-        ${esc(item.name)}（${esc(categoryName)}）100gあたりの、タンパク質・カロリー・脂質・炭水化物です。
+        ${answerLead(item, serving)}
       </p>
 
       <h2>100gあたり</h2>
@@ -515,6 +732,8 @@ ${breakdownSection(item)}
       <p>${esc(categoryName)}に収録している${categoryCount}品目のうち、タンパク質量は<strong>${rank}番目</strong>です。</p>
 
 ${relatedSection}
+
+${faqSection(faq)}
 
 ${sourceBlock(item)}
 
@@ -533,6 +752,7 @@ ${ctaBlock('foods_detail')}
       { name: item.name, path: `/foods/${encodeURI(slug)}.html` },
     ],
     body,
+    jsonLd: [foodLd(item, ctx), faqLd(faq), ORGANIZATION_LD],
   });
 }
 
@@ -575,6 +795,16 @@ ${ctaBlock('foods_category')}
     title,
     description,
     canonicalPath: `/foods/category-${encodeURI(categorySlug)}.html`,
+    jsonLd: [
+      itemListLd({
+        name: `${categoryName}の栄養成分一覧`,
+        description,
+        path: `/foods/category-${encodeURI(categorySlug)}.html`,
+        items: sorted,
+        ordered: true,
+      }),
+      ORGANIZATION_LD,
+    ],
     breadcrumb: [
       { name: 'ホーム', path: '/' },
       { name: '食品成分表', path: '/foods/' },
@@ -625,6 +855,16 @@ ${ctaBlock('foods_ranking')}
     title,
     description,
     canonicalPath: '/foods/protein-ranking.html',
+    jsonLd: [
+      itemListLd({
+        name: 'タンパク質が多い食品ランキング100',
+        description,
+        path: '/foods/protein-ranking.html',
+        items: top,
+        ordered: true,
+      }),
+      ORGANIZATION_LD,
+    ],
     breadcrumb: [
       { name: 'ホーム', path: '/' },
       { name: '食品成分表', path: '/foods/' },
@@ -667,6 +907,50 @@ ${ctaBlock('foods_index')}`;
     title,
     description,
     canonicalPath: '/foods/',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: '食品のタンパク質・カロリー一覧',
+        description,
+        url: `${SITE}/foods/`,
+        isPartOf: { '@type': 'WebSite', name: 'プロテインノート', url: SITE },
+        citation: {
+          '@type': 'CreativeWork',
+          name: FOOD_DATA_SOURCE,
+          publisher: { '@type': 'GovernmentOrganization', name: '文部科学省' },
+          url: 'https://fooddb.mext.go.jp/',
+        },
+        mainEntity: {
+          '@type': 'ItemList',
+          name: '分類',
+          numberOfItems: categories.length,
+          itemListElement: categories.map((c, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: c.categoryName,
+            url: `${SITE}/foods/category-${encodeURI(c.categorySlug)}.html`,
+          })),
+        },
+      },
+      {
+        // Google Dataset Search 向け。政府の成分表に基づく成分値の集合であり、
+        // データセットとして提示するのが実態に合う。出典とライセンスを明記する。
+        '@context': 'https://schema.org',
+        '@type': 'Dataset',
+        name: '食品のタンパク質・カロリー成分表',
+        description: `${total}品目の100gあたりタンパク質・カロリー・脂質・炭水化物。${FOOD_DATA_SOURCE}の収載値に基づく。`,
+        url: `${SITE}/foods/`,
+        keywords: ['タンパク質', 'カロリー', '栄養成分', '日本食品標準成分表', 'PFC'],
+        license: 'https://www.digital.go.jp/resources/open_data/public_data_license_v1.0',
+        isBasedOn: 'https://fooddb.mext.go.jp/',
+        creator: { '@type': 'GovernmentOrganization', name: '文部科学省' },
+        publisher: { '@type': 'Organization', name: 'プロテインノート', url: SITE },
+        inLanguage: 'ja',
+        variableMeasured: ['たんぱく質', 'エネルギー', '脂質', '炭水化物'],
+      },
+      ORGANIZATION_LD,
+    ],
     breadcrumb: [
       { name: 'ホーム', path: '/' },
       { name: '食品成分表', path: '/foods/' },

@@ -343,3 +343,20 @@
   font-weight: 600;
   border-top: 2px solid currentColor;
 }
+
+/* よくある質問。折りたたまず常時表示する（読み手にもクローラーにも届くように） */
+.food-faq {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.food-faq-item h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+  line-height: 1.5;
+}
+.food-faq-item p {
+  margin: 0;
+  opacity: 0.85;
+}
