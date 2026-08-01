@@ -233,13 +233,13 @@ const ORGANIZATION_LD = {
   url: SITE,
   logo: `${SITE}/images/icon-180.png`,
   description:
-    'タンパク質を中心に、日々の食事とトレーニングを記録するiOSアプリ。日本食品標準成分表に基づく食品成分表を公開しています。',
+    'たんぱく質を中心に、日々の食事とトレーニングを記録するiOSアプリ。日本食品標準成分表に基づく食品成分表を公開しています。',
 };
 
 /**
  * 一覧ページの ItemList
  *
- * 「タンパク質が多い食品は？」に対して、順位つきの構造化データがあると
+ * 「たんぱく質が多い食品は？」に対して、順位つきの構造化データがあると
  * リストそのものを引用できる。表を目で読ませるより確実。
  */
 function itemListLd({ name, description, path, items, ordered }) {
@@ -358,7 +358,9 @@ ${jsonLd
         </a>
         <nav>
           <a href="${up}foods/">食品成分表</a>
-          <a href="${up}tools/protein-calculator.html">必要量の計算</a>
+          <a href="${up}tools/">計算ツール</a>
+          <a href="${up}guide/">使い方ガイド</a>
+          <a href="${up}faq.html">よくある質問</a>
           <a href="${up}">ホーム</a>
         </nav>
       </div>
@@ -408,6 +410,7 @@ function sourceBlock(item) {
   return `      <section class="food-source">
         <h2>出典と注意事項</h2>
         <p>${text}</p>
+        <p class="food-disclaimer">本サイトは日本食品標準成分表の表記に合わせて「たんぱく質」と記載しています。「タンパク質」「蛋白質」と同じ意味です。</p>
         <p class="food-disclaimer">${esc(DISCLAIMER)}</p>
         <p class="food-disclaimer">本ページは栄養成分の情報提供を目的としたもので、医療上の助言ではありません。治療中の方や食事制限のある方は医師・管理栄養士にご相談ください。</p>
       </section>`;
@@ -434,7 +437,7 @@ function nutritionTable(item, grams) {
   };
   return `      <table class="food-table">
         <tbody>
-${row('タンパク質', item.proteinPer100g, 'g')}
+${row('たんぱく質', item.proteinPer100g, 'g')}
 ${row('カロリー', item.caloriesPer100g, 'kcal')}
 ${row('脂質', item.fatPer100g, 'g')}
 ${row('炭水化物', item.carbsPer100g, 'g')}
@@ -476,7 +479,7 @@ function breakdownSection(item) {
       <div class="food-table-wrap">
       <table class="food-table">
         <thead>
-          <tr><th>材料（成分表の収載名）</th><th>食品番号</th><th>分量</th><th>タンパク質</th><th>カロリー</th></tr>
+          <tr><th>材料（成分表の収載名）</th><th>食品番号</th><th>分量</th><th>たんぱく質</th><th>カロリー</th></tr>
         </thead>
         <tbody>
 ${rows}
@@ -500,10 +503,10 @@ function pfcBalance(item) {
   if (total <= 0) return '';
   const pct = (v) => Math.round((v / total) * 100);
   return `      <h2>PFCバランス</h2>
-      <p>タンパク質・脂質・炭水化物をそれぞれ 4kcal/g・9kcal/g・4kcal/g として換算した、エネルギー比の目安です。</p>
+      <p>たんぱく質・脂質・炭水化物をそれぞれ 4kcal/g・9kcal/g・4kcal/g として換算した、エネルギー比の目安です。</p>
       <table class="food-table">
         <tbody>
-          <tr><th>タンパク質</th><td>${pct(pk)}%</td></tr>
+          <tr><th>たんぱく質</th><td>${pct(pk)}%</td></tr>
           <tr><th>脂質</th><td>${pct(fk)}%</td></tr>
           <tr><th>炭水化物</th><td>${pct(ck)}%</td></tr>
         </tbody>
@@ -515,17 +518,17 @@ function pfcBalance(item) {
 /**
  * 「答え」を先頭に置く一文を作る
  *
- * 検索でもAIの回答でも、聞かれているのは「この食品のタンパク質は何gか」で、
+ * 検索でもAIの回答でも、聞かれているのは「この食品のたんぱく質は何gか」で、
  * 「このページには栄養成分が載っています」という説明ではない。
  * 数値を含む文を本文の最初に置き、そこだけ読めば答えが完結するようにする。
  */
 function answerLead(item, serving) {
   const p = fmt(item.proteinPer100g, 'g');
   const cal = fmt(item.caloriesPer100g, 'kcal');
-  const head = `${esc(item.name)}100gあたりのタンパク質は${p}、カロリーは${cal}、脂質は${fmt(item.fatPer100g, 'g')}、炭水化物は${fmt(item.carbsPer100g, 'g')}です。`;
+  const head = `${esc(item.name)}100gあたりのたんぱく質は${p}、カロリーは${cal}、脂質は${fmt(item.fatPer100g, 'g')}、炭水化物は${fmt(item.carbsPer100g, 'g')}です。`;
   const tail =
     serving && serving !== 100
-      ? `1食分の目安${serving}gに換算すると、タンパク質${fmt((num(item.proteinPer100g) ?? 0) * serving / 100, 'g')}、カロリー${fmt((num(item.caloriesPer100g) ?? 0) * serving / 100, 'kcal')}です。`
+      ? `1食分の目安${serving}gに換算すると、たんぱく質${fmt((num(item.proteinPer100g) ?? 0) * serving / 100, 'g')}、カロリー${fmt((num(item.caloriesPer100g) ?? 0) * serving / 100, 'kcal')}です。`
       : '';
   return head + tail;
 }
@@ -534,7 +537,7 @@ function answerLead(item, serving) {
  * よくある質問（可視のQ&A）
  *
  * ■ なぜ入れるか
- * 検索の入力も、AIへの質問も「卵のタンパク質は？」という問いの形で来る。
+ * 検索の入力も、AIへの質問も「卵のたんぱく質は？」という問いの形で来る。
  * ページが表と数値だけだと、問いと本文の言葉が噛み合わず引用されにくい。
  * 事実だけで構成できるうえ、1ページ810字だった本文の薄さも同時に解消する。
  *
@@ -554,14 +557,14 @@ function faqEntries(item, ctx) {
   const list = [];
 
   list.push({
-    q: `${item.name}のタンパク質は100gあたり何gですか？`,
+    q: `${item.name}のたんぱく質は100gあたり何gですか？`,
     a: `${fmt(p, 'g')}です。${FOOD_DATA_SOURCE}の収載値${item.seibunhyoNo ? `（食品番号 ${item.seibunhyoNo}）` : ''}です。`,
   });
 
   if (serving && serving !== 100) {
     list.push({
-      q: `${item.name}1食分（${serving}g）のタンパク質とカロリーは？`,
-      a: `タンパク質${fmt((p * serving) / 100, 'g')}、カロリー${fmt((cal * serving) / 100, 'kcal')}です。100gあたりの値を${serving}gに換算しています。`,
+      q: `${item.name}1食分（${serving}g）のたんぱく質とカロリーは？`,
+      a: `たんぱく質${fmt((p * serving) / 100, 'g')}、カロリー${fmt((cal * serving) / 100, 'kcal')}です。100gあたりの値を${serving}gに換算しています。`,
     });
   }
 
@@ -571,8 +574,8 @@ function faqEntries(item, ctx) {
   });
 
   list.push({
-    q: `${item.name}は${categoryName}のなかでタンパク質が多いほうですか？`,
-    a: `当サイトが${categoryName}に収録している${categoryCount}品目のうち、100gあたりのタンパク質量は${rank}番目です。`,
+    q: `${item.name}は${categoryName}のなかでたんぱく質が多いほうですか？`,
+    a: `当サイトが${categoryName}に収録している${categoryCount}品目のうち、100gあたりのたんぱく質量は${rank}番目です。`,
   });
 
   // 材料が分かっているものは、その根拠も質問の形で置く
@@ -687,8 +690,8 @@ function foodPage(item, ctx) {
   const p = num(item.proteinPer100g);
   const cal = num(item.caloriesPer100g);
 
-  const title = `${item.name}のタンパク質量・カロリー｜100gあたりの栄養成分 - プロテインノート`;
-  const description = `${item.name}の栄養成分。100gあたりタンパク質${fmt(p, 'g')}・カロリー${fmt(cal, 'kcal')}・脂質${fmt(item.fatPer100g, 'g')}・炭水化物${fmt(item.carbsPer100g, 'g')}。${serving && serving !== 100 ? `1食分の目安${serving}gあたりの数値も掲載。` : ''}出典は${FOOD_DATA_SOURCE}。`;
+  const title = `${item.name}のたんぱく質量・カロリー｜100gあたりの栄養成分 - プロテインノート`;
+  const description = `${item.name}の栄養成分。100gあたりたんぱく質${fmt(p, 'g')}・カロリー${fmt(cal, 'kcal')}・脂質${fmt(item.fatPer100g, 'g')}・炭水化物${fmt(item.carbsPer100g, 'g')}。${serving && serving !== 100 ? `1食分の目安${serving}gあたりの数値も掲載。` : ''}出典は${FOOD_DATA_SOURCE}。`;
 
   // typicalServingG が 100 の食品は「100gあたり」と同一の表になり、
   // 重複コンテンツにしかならないので出力しない
@@ -704,7 +707,7 @@ ${nutritionTable(item, serving)}`
 ${related
   .map(
     (r) =>
-      `        <li><a href="${encodeURI(r.__slug)}.html">${esc(r.name)}</a> <span class="food-links-note">タンパク質 ${fmt(r.proteinPer100g, 'g')}／100g</span></li>`,
+      `        <li><a href="${encodeURI(r.__slug)}.html">${esc(r.name)}</a> <span class="food-links-note">たんぱく質 ${fmt(r.proteinPer100g, 'g')}／100g</span></li>`,
   )
   .join('\n')}
       </ul>`
@@ -729,7 +732,7 @@ ${pfcBalance(item)}
 ${breakdownSection(item)}
 
       <h2>${esc(categoryName)}のなかでの位置</h2>
-      <p>${esc(categoryName)}に収録している${categoryCount}品目のうち、タンパク質量は<strong>${rank}番目</strong>です。</p>
+      <p>${esc(categoryName)}に収録している${categoryCount}品目のうち、たんぱく質量は<strong>${rank}番目</strong>です。</p>
 
 ${relatedSection}
 
@@ -769,16 +772,16 @@ function categoryPage(categoryName, categorySlug, items) {
   const sorted = [...items].sort(
     (a, b) => (num(b.proteinPer100g) ?? -1) - (num(a.proteinPer100g) ?? -1),
   );
-  const title = `${categoryName}のタンパク質・カロリー一覧（${items.length}品目）- プロテインノート`;
-  const description = `${categoryName}${items.length}品目の100gあたりタンパク質・カロリー・脂質・炭水化物の一覧。タンパク質量の多い順に掲載。出典は${FOOD_DATA_SOURCE}。`;
+  const title = `${categoryName}のたんぱく質・カロリー一覧（${items.length}品目）- プロテインノート`;
+  const description = `${categoryName}${items.length}品目の100gあたりたんぱく質・カロリー・脂質・炭水化物の一覧。たんぱく質量の多い順に掲載。出典は${FOOD_DATA_SOURCE}。`;
 
   const body = `      <nav class="breadcrumb" aria-label="パンくず"><a href="../">ホーム</a> › <a href="./">食品成分表</a> › <span>${esc(categoryName)}</span></nav>
       <h1>${esc(categoryName)}の栄養成分一覧</h1>
-      <p class="support-lead">${esc(categoryName)}に収録している${items.length}品目を、100gあたりのタンパク質量が多い順に並べています。</p>
+      <p class="support-lead">${esc(categoryName)}に収録している${items.length}品目を、100gあたりのたんぱく質量が多い順に並べています。</p>
 
       <div class="table-wrap">
         <table class="food-table food-table--list">
-          <thead><tr><th>食品</th><th>タンパク質</th><th>カロリー</th><th>脂質</th><th>炭水化物</th></tr></thead>
+          <thead><tr><th>食品</th><th>たんぱく質</th><th>カロリー</th><th>脂質</th><th>炭水化物</th></tr></thead>
           <tbody>
 ${foodTableRows(sorted)}
           </tbody>
@@ -789,7 +792,7 @@ ${sourceBlock()}
 
 ${ctaBlock('foods_category')}
 
-      <nav class="guide-nav"><a href="./">← 食品成分表の一覧</a><a href="protein-ranking.html">タンパク質量の多い食品 →</a></nav>`;
+      <nav class="guide-nav"><a href="./">← 食品成分表の一覧</a><a href="protein-ranking.html">たんぱく質量の多い食品 →</a></nav>`;
 
   return layout({
     title,
@@ -820,8 +823,8 @@ function rankingPage(allItems) {
     .sort((a, b) => b.proteinPer100g - a.proteinPer100g)
     .slice(0, 100);
 
-  const title = `タンパク質が多い食品ランキング100｜100gあたり - プロテインノート`;
-  const description = `${allItems.length}品目から、100gあたりのタンパク質量が多い食品を100位まで掲載。カロリー・脂質・炭水化物も併記。出典は${FOOD_DATA_SOURCE}。`;
+  const title = `たんぱく質が多い食品ランキング100｜100gあたり - プロテインノート`;
+  const description = `${allItems.length}品目から、100gあたりのたんぱく質量が多い食品を100位まで掲載。カロリー・脂質・炭水化物も併記。出典は${FOOD_DATA_SOURCE}。`;
 
   const rows = top
     .map(
@@ -830,13 +833,13 @@ function rankingPage(allItems) {
     )
     .join('\n');
 
-  const body = `      <nav class="breadcrumb" aria-label="パンくず"><a href="../">ホーム</a> › <a href="./">食品成分表</a> › <span>タンパク質が多い食品</span></nav>
-      <h1>タンパク質が多い食品ランキング100</h1>
-      <p class="support-lead">収録している${allItems.length}品目を、100gあたりのタンパク質量が多い順に100位まで並べています。</p>
+  const body = `      <nav class="breadcrumb" aria-label="パンくず"><a href="../">ホーム</a> › <a href="./">食品成分表</a> › <span>たんぱく質が多い食品</span></nav>
+      <h1>たんぱく質が多い食品ランキング100</h1>
+      <p class="support-lead">収録している${allItems.length}品目を、100gあたりのたんぱく質量が多い順に100位まで並べています。</p>
 
       <div class="table-wrap">
         <table class="food-table food-table--list">
-          <thead><tr><th>順位</th><th>食品</th><th>タンパク質</th><th>カロリー</th><th>分類</th></tr></thead>
+          <thead><tr><th>順位</th><th>食品</th><th>たんぱく質</th><th>カロリー</th><th>分類</th></tr></thead>
           <tbody>
 ${rows}
           </tbody>
@@ -857,7 +860,7 @@ ${ctaBlock('foods_ranking')}
     canonicalPath: '/foods/protein-ranking.html',
     jsonLd: [
       itemListLd({
-        name: 'タンパク質が多い食品ランキング100',
+        name: 'たんぱく質が多い食品ランキング100',
         description,
         path: '/foods/protein-ranking.html',
         items: top,
@@ -868,15 +871,15 @@ ${ctaBlock('foods_ranking')}
     breadcrumb: [
       { name: 'ホーム', path: '/' },
       { name: '食品成分表', path: '/foods/' },
-      { name: 'タンパク質が多い食品ランキング100', path: '/foods/protein-ranking.html' },
+      { name: 'たんぱく質が多い食品ランキング100', path: '/foods/protein-ranking.html' },
     ],
     body,
   });
 }
 
 function indexPage(categories, total) {
-  const title = `食品のタンパク質・カロリー一覧（${total}品目）- プロテインノート`;
-  const description = `${total}品目の100gあたりタンパク質・カロリー・脂質・炭水化物を分類別に掲載。出典は${FOOD_DATA_SOURCE}。`;
+  const title = `食品のたんぱく質・カロリー一覧（${total}品目）- プロテインノート`;
+  const description = `${total}品目の100gあたりたんぱく質・カロリー・脂質・炭水化物を分類別に掲載。出典は${FOOD_DATA_SOURCE}。`;
 
   const cards = categories
     .map(
@@ -886,12 +889,12 @@ function indexPage(categories, total) {
     .join('\n');
 
   const body = `      <nav class="breadcrumb" aria-label="パンくず"><a href="../">ホーム</a> › <span>食品成分表</span></nav>
-      <h1>食品のタンパク質・カロリー一覧</h1>
-      <p class="support-lead">${total}品目の100gあたりの栄養成分（タンパク質・カロリー・脂質・炭水化物）を、分類別にまとめています。</p>
+      <h1>食品のたんぱく質・カロリー一覧</h1>
+      <p class="support-lead">${total}品目の100gあたりの栄養成分（たんぱく質・カロリー・脂質・炭水化物）を、分類別にまとめています。</p>
 
-      <h2>タンパク質量から探す</h2>
+      <h2>たんぱく質量から探す</h2>
       <ul class="food-links">
-        <li><a href="protein-ranking.html">タンパク質が多い食品ランキング100</a></li>
+        <li><a href="protein-ranking.html">たんぱく質が多い食品ランキング100</a></li>
       </ul>
 
       <h2>分類から探す</h2>
@@ -911,7 +914,7 @@ ${ctaBlock('foods_index')}`;
       {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: '食品のタンパク質・カロリー一覧',
+        name: '食品のたんぱく質・カロリー一覧',
         description,
         url: `${SITE}/foods/`,
         isPartOf: { '@type': 'WebSite', name: 'プロテインノート', url: SITE },
@@ -938,10 +941,10 @@ ${ctaBlock('foods_index')}`;
         // データセットとして提示するのが実態に合う。出典とライセンスを明記する。
         '@context': 'https://schema.org',
         '@type': 'Dataset',
-        name: '食品のタンパク質・カロリー成分表',
-        description: `${total}品目の100gあたりタンパク質・カロリー・脂質・炭水化物。${FOOD_DATA_SOURCE}の収載値に基づく。`,
+        name: '食品のたんぱく質・カロリー成分表',
+        description: `${total}品目の100gあたりたんぱく質・カロリー・脂質・炭水化物。${FOOD_DATA_SOURCE}の収載値に基づく。`,
         url: `${SITE}/foods/`,
-        keywords: ['タンパク質', 'カロリー', '栄養成分', '日本食品標準成分表', 'PFC'],
+        keywords: ['たんぱく質', 'カロリー', '栄養成分', '日本食品標準成分表', 'PFC'],
         license: 'https://www.digital.go.jp/resources/open_data/public_data_license_v1.0',
         isBasedOn: 'https://fooddb.mext.go.jp/',
         creator: { '@type': 'GovernmentOrganization', name: '文部科学省' },

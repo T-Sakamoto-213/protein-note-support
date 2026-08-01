@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PFCバランス計算｜たんぱく質・脂質・炭水化物のグラム数を計算 - プロテインノート</title>
+    <meta name="description" content="1日の摂取カロリーと体重・目的から、PFC（たんぱく質・脂質・炭水化物）を何g摂ればよいかを計算します。減量・維持・増量別に対応。厚生労働省『日本人の食事摂取基準（2025年版）』を参照。登録不要・無料。" />
+    <link rel="canonical" href="https://protein-note.theslopebook.jp/tools/pfc-calculator.html" />
+    <meta property="og:site_name" content="プロテインノート" />
+    <meta property="og:title" content="PFCバランス計算｜たんぱく質・脂質・炭水化物のグラム数を計算 - プロテインノート" />
+    <meta property="og:description" content="1日の摂取カロリーと体重・目的から、PFC（たんぱく質・脂質・炭水化物）を何g摂ればよいかを計算します。減量・維持・増量別に対応。厚生労働省『日本人の食事摂取基準（2025年版）』を参照。登録不要・無料。" />
+    <meta property="og:image" content="https://protein-note.theslopebook.jp/images/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://protein-note.theslopebook.jp/tools/pfc-calculator.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="../favicon.ico" sizes="32x32" />
+    <link rel="icon" href="../images/icon-96.png" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="../images/icon-180.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/lp.css" />
+    <link rel="stylesheet" href="../css/foods.css" />
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://protein-note.theslopebook.jp/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "計算ツール",
+      "item": "https://protein-note.theslopebook.jp/tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "PFCバランス計算",
+      "item": "https://protein-note.theslopebook.jp/tools/pfc-calculator.html"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "PFCバランスとは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "P（protein＝たんぱく質）、F（fat＝脂質）、C（carbohydrate＝炭水化物）の3つを、摂取エネルギーに占める割合で表したものです。たんぱく質と炭水化物は1gあたり4kcal、脂質は1gあたり9kcalとして換算します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "PFCの比率はどれくらいが目安ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "厚生労働省『日本人の食事摂取基準（2025年版）』では、エネルギー産生栄養素バランスの目標量として、たんぱく質13〜20%、脂質20〜30%、炭水化物50〜65%（いずれも1歳以上）が示されています。運動習慣や目的によって、この範囲内で配分を変える方法がとられます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "たんぱく質は何gにすればよいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "体重1kgあたりで決める方法が一般的です。運動習慣がない場合は1.0g/kg前後、トレーニングをしている場合は1.4〜2.0g/kg程度が目安として使われます。本ページでは活動量と目的から自動で係数を選んでいます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "計算した内容は送信されますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "送信されません。計算はすべてブラウザの中で行われ、入力した体重などがサーバーに送られることはありません。"
+      }
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "プロテインノート",
+  "url": "https://protein-note.theslopebook.jp",
+  "logo": "https://protein-note.theslopebook.jp/images/icon-180.png"
+}
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SD50LR5JYC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SD50LR5JYC');
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="inner">
+        <a href="../" class="logo">
+          <img src="../images/icon-96.png" alt="プロテインノート" width="32" height="32" />
+          Protein Note
+        </a>
+        <nav>
+          <a href="../foods/">食品成分表</a>
+          <a href="../tools/">計算ツール</a>
+          <a href="../guide/">使い方ガイド</a>
+          <a href="../faq.html">よくある質問</a>
+          <a href="../">ホーム</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <nav class="breadcrumb" aria-label="パンくず"><a href="../">ホーム</a> › <a href="./">計算ツール</a> › <span>PFCバランス計算</span></nav>
+      <h1>PFCバランス計算</h1>
+      <p class="support-lead">1日の摂取カロリーと目的から、たんぱく質（P）・脂質（F）・炭水化物（C）をそれぞれ何g摂ればよいかを計算します。カロリーが分からない場合は<a href="calorie-calculator.html">カロリー計算</a>で先に求めてください。登録不要で、入力した内容が送信されることはありません。</p>
+
+      <form class="calc-form" id="calc">
+        <div class="calc-field">
+          <label for="kcal">1日の摂取カロリー（kcal）</label>
+          <input type="number" id="kcal" value="2000" min="800" max="6000" inputmode="numeric" />
+        </div>
+        <div class="calc-field">
+          <label for="weight">体重（kg）</label>
+          <input type="number" id="weight" value="60" min="30" max="200" inputmode="decimal" />
+        </div>
+        <div class="calc-field">
+          <label for="goal">目的</label>
+          <select id="goal">
+            <option value="keep">体重を維持したい</option>
+            <option value="cut">減量したい</option>
+            <option value="bulk">筋肉をつけたい</option>
+          </select>
+        </div>
+        <div class="calc-field">
+          <label for="train">運動習慣</label>
+          <select id="train">
+            <option value="none">ほぼ運動なし</option>
+            <option value="light">軽い運動（週1〜3回）</option>
+            <option value="mid" selected>中程度（週3〜5回）</option>
+            <option value="hard">ハード（週6回以上）</option>
+          </select>
+        </div>
+      </form>
+
+      <div class="table-wrap">
+        <table class="food-table">
+          <thead><tr><th>栄養素</th><th>1日の目安</th><th>エネルギー比</th></tr></thead>
+          <tbody>
+            <tr><th>P たんぱく質</th><td><strong><span id="p">—</span> g</strong></td><td><span id="pp">—</span>%</td></tr>
+            <tr><th>F 脂質</th><td><strong><span id="f">—</span> g</strong></td><td><span id="fp">—</span>%</td></tr>
+            <tr><th>C 炭水化物</th><td><strong><span id="c">—</span> g</strong></td><td><span id="cp">—</span>%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="calc-result-sub">たんぱく質は体重1kgあたり <span id="gkg">—</span> g で算出しています。</p>
+      <p class="food-disclaimer">この数値はあくまで推定値です。個人差があり、効果や結果を保証するものではありません。年齢・性別・体組成・持病・妊娠授乳の有無などによって適切な量は変わります。治療中の方、腎機能に不安のある方は、必ず医師・管理栄養士にご相談ください。</p>
+      <noscript><p class="food-disclaimer">お使いの環境ではJavaScriptが無効のため、自動計算は動作しません。下の「計算の考え方」から手計算できます。</p></noscript>
+
+      <h2>計算の考え方</h2>
+      <p>次の順番で決めています。</p>
+      <ol class="steps">
+        <li>たんぱく質を、体重1kgあたりの係数（下表）から決める</li>
+        <li>脂質を、総エネルギーの25%（減量時は20%）として決める</li>
+        <li>残りのエネルギーを炭水化物に割り当てる</li>
+      </ol>
+      <div class="table-wrap">
+        <table class="food-table">
+          <thead><tr><th>運動習慣</th><th>維持</th><th>減量</th><th>筋肉をつけたい</th></tr></thead>
+          <tbody>
+            <tr><th>ほぼ運動なし</th><td>1.0g</td><td>1.2g</td><td>1.2g</td></tr>
+            <tr><th>軽い運動（週1〜3回）</th><td>1.2g</td><td>1.4g</td><td>1.4g</td></tr>
+            <tr><th>中程度（週3〜5回）</th><td>1.4g</td><td>1.6g</td><td>1.6g</td></tr>
+            <tr><th>ハード（週6回以上）</th><td>1.6g</td><td>1.8g</td><td>2.0g</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>たんぱく質と炭水化物は1gあたり4kcal、脂質は1gあたり9kcalとして換算しています。</p>
+      <p class="food-disclaimer">本サイトは日本食品標準成分表の表記に合わせて「たんぱく質」と記載しています。「タンパク質」「蛋白質」と同じ意味です。</p>
+
+      <h2>よくある質問</h2>
+      <div class="food-faq">
+        <div class="food-faq-item">
+          <h3>PFCバランスとは何ですか？</h3>
+          <p>P（protein＝たんぱく質）、F（fat＝脂質）、C（carbohydrate＝炭水化物）の3つを、摂取エネルギーに占める割合で表したものです。たんぱく質と炭水化物は1gあたり4kcal、脂質は1gあたり9kcalとして換算します。</p>
+        </div>
+        <div class="food-faq-item">
+          <h3>PFCの比率はどれくらいが目安ですか？</h3>
+          <p>厚生労働省『日本人の食事摂取基準（2025年版）』では、エネルギー産生栄養素バランスの目標量として、たんぱく質13〜20%、脂質20〜30%、炭水化物50〜65%（いずれも1歳以上）が示されています。運動習慣や目的によって、この範囲内で配分を変える方法がとられます。</p>
+        </div>
+        <div class="food-faq-item">
+          <h3>たんぱく質は何gにすればよいですか？</h3>
+          <p>体重1kgあたりで決める方法が一般的です。運動習慣がない場合は1.0g/kg前後、トレーニングをしている場合は1.4〜2.0g/kg程度が目安として使われます。本ページでは活動量と目的から自動で係数を選んでいます。</p>
+        </div>
+        <div class="food-faq-item">
+          <h3>計算した内容は送信されますか？</h3>
+          <p>送信されません。計算はすべてブラウザの中で行われ、入力した体重などがサーバーに送られることはありません。</p>
+        </div>
+      </div>
+
+      <section class="food-source">
+        <h2>出典と注意事項</h2>
+        <p>エネルギー産生栄養素バランスの考え方は厚生労働省『日本人の食事摂取基準（2025年版）』、体重1kgあたりのたんぱく質量は ISSN Position Stand: protein and exercise (Jäger et al., 2017, J Int Soc Sports Nutr) を参照しています。</p>
+        <p class="food-disclaimer">この数値はあくまで推定値です。個人差があり、効果や結果を保証するものではありません。年齢・性別・体組成・持病・妊娠授乳の有無などによって適切な量は変わります。治療中の方、腎機能に不安のある方は、必ず医師・管理栄養士にご相談ください。</p>
+        <p class="food-disclaimer">本ページは栄養に関する情報提供を目的としたもので、医療上の助言ではありません。特定の疾病の予防・治療・改善を目的とするものではありません。</p>
+      </section>
+
+      <h2>次にやること</h2>
+      <ul class="food-links">
+        <li><a href="../foods/protein-ranking.html">たんぱく質が多い食品ランキング100</a> <span class="food-links-note">算出したPを満たす食品を探す</span></li>
+        <li><a href="../foods/">食品成分表（654品目）</a></li>
+        <li><a href="../guide/protein-tracking.html">たんぱく質の記録方法</a></li>
+      </ul>
+
+      <div class="mid-cta">
+        <p>毎日の記録は、プロテインノートで。基本機能は無料です。</p>
+        <a href="https://apps.apple.com/jp/app/id6748221439" class="store-badge" target="_blank" rel="noopener noreferrer" data-cta="tools">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83" alt="App Storeからダウンロード" width="157" height="54" loading="lazy" />
+        </a>
+      </div>
+
+      <nav class="guide-nav"><a href="calorie-calculator.html">← カロリー計算</a><a href="../foods/">食品成分表 →</a></nav>
+    </main>
+
+    <footer class="site-footer">
+      <div class="inner">
+        <nav>
+          <a href="../foods/">食品成分表</a>
+          <a href="../tools/">計算ツール</a>
+          <a href="../guide/">使い方ガイド</a>
+          <a href="../faq.html">よくある質問</a>
+          <a href="../support.html">サポート</a>
+          <a href="../privacy.html">プライバシーポリシー</a>
+          <a href="../terms.html">利用規約</a>
+        </nav>
+        <p class="copyright">© THE SLOPE BOOK</p>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        var G = {
+          none: { keep: 1.0, cut: 1.2, bulk: 1.2 },
+          light: { keep: 1.2, cut: 1.4, bulk: 1.4 },
+          mid: { keep: 1.4, cut: 1.6, bulk: 1.6 },
+          hard: { keep: 1.6, cut: 1.8, bulk: 2.0 }
+        };
+        function calc() {
+          var kcal = parseFloat(document.getElementById('kcal').value);
+          var w = parseFloat(document.getElementById('weight').value);
+          var goal = document.getElementById('goal').value;
+          var train = document.getElementById('train').value;
+          if (!(kcal > 0 && w > 0)) return;
+          var gkg = G[train][goal];
+          var p = w * gkg;
+          var fatRatio = goal === 'cut' ? 0.20 : 0.25;
+          var f = (kcal * fatRatio) / 9;
+          var c = (kcal - p * 4 - f * 9) / 4;
+          if (c < 0) c = 0;
+          var set = function (id, v) { document.getElementById(id).textContent = Math.round(v); };
+          set('p', p); set('f', f); set('c', c);
+          var total = p * 4 + f * 9 + c * 4;
+          set('pp', (p * 4 / total) * 100);
+          set('fp', (f * 9 / total) * 100);
+          set('cp', (c * 4 / total) * 100);
+          document.getElementById('gkg').textContent = gkg.toFixed(1);
+        }
+        ['kcal', 'weight', 'goal', 'train'].forEach(function (id) {
+          var el = document.getElementById(id);
+          el.addEventListener('input', calc);
+          el.addEventListener('change', calc);
+        });
+        calc();
+      })();
+    </script>
+  </body>
+</html>

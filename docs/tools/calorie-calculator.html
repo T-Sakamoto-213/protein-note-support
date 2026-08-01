@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>カロリー計算｜1日の必要カロリーと基礎代謝を計算 - プロテインノート</title>
+    <meta name="description" content="身長・体重・年齢・性別・活動量から1日の消費カロリー（TDEE）と基礎代謝量を計算。減量・維持・増量それぞれの摂取カロリーの目安も表示します。ハリス・ベネディクト式改訂版を使用。登録不要・無料。" />
+    <link rel="canonical" href="https://protein-note.theslopebook.jp/tools/calorie-calculator.html" />
+    <meta property="og:site_name" content="プロテインノート" />
+    <meta property="og:title" content="カロリー計算｜1日の必要カロリーと基礎代謝を計算 - プロテインノート" />
+    <meta property="og:description" content="身長・体重・年齢・性別・活動量から1日の消費カロリー（TDEE）と基礎代謝量を計算。減量・維持・増量それぞれの摂取カロリーの目安も表示します。ハリス・ベネディクト式改訂版を使用。登録不要・無料。" />
+    <meta property="og:image" content="https://protein-note.theslopebook.jp/images/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://protein-note.theslopebook.jp/tools/calorie-calculator.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="../favicon.ico" sizes="32x32" />
+    <link rel="icon" href="../images/icon-96.png" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="../images/icon-180.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/lp.css" />
+    <link rel="stylesheet" href="../css/foods.css" />
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://protein-note.theslopebook.jp/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "計算ツール",
+      "item": "https://protein-note.theslopebook.jp/tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "カロリー計算",
+      "item": "https://protein-note.theslopebook.jp/tools/calorie-calculator.html"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "1日に必要なカロリーはどうやって計算しますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "まず基礎代謝量（安静時に消費するエネルギー）を身長・体重・年齢・性別から求め、それに活動量に応じた係数を掛けて1日の消費カロリー（TDEE）を算出します。本ページではハリス・ベネディクト式の改訂版を使っています。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "基礎代謝量とTDEEの違いは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "基礎代謝量は横になって何もしない状態で消費するエネルギーです。TDEE（total daily energy expenditure）は、そこに日常の活動や運動による消費を加えた1日の合計です。食事の目安に使うのはTDEEのほうです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "減量したい場合は何kcalにすればよいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "一般に、消費カロリーより摂取カロリーが少ない状態が続くと体重は減ります。急激な制限は栄養不足につながるため、TDEEから15〜20%程度を引いた値が目安として使われます。適切な設定は個人差が大きいため、医師・管理栄養士にご相談ください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "計算した内容は送信されますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "送信されません。計算はすべてブラウザの中で行われ、入力した身長・体重・年齢がサーバーに送られることはありません。"
+      }
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "プロテインノート",
+  "url": "https://protein-note.theslopebook.jp",
+  "logo": "https://protein-note.theslopebook.jp/images/icon-180.png"
+}
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SD50LR5JYC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SD50LR5JYC');
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="inner">
+        <a href="../" class="logo">
+          <img src="../images/icon-96.png" alt="プロテインノート" width="32" height="32" />
+          Protein Note
+        </a>
+        <nav>
+          <a href="../foods/">食品成分表</a>
+          <a href="../tools/">計算ツール</a>
+          <a href="../guide/">使い方ガイド</a>
+          <a href="../faq.html">よくある質問</a>
+          <a href="../">ホーム</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <nav class="breadcrumb" aria-label="パンくず"><a href="../">ホーム</a> › <a href="./">計算ツール</a> › <span>カロリー計算</span></nav>
+      <h1>1日の必要カロリー計算</h1>
+      <p class="support-lead">身長・体重・年齢・性別・活動量から、1日の消費カロリー（TDEE）と基礎代謝量を計算します。減量・維持・増量それぞれの目安も表示します。登録不要で、入力した内容が送信されることはありません。</p>
+
+      <form class="calc-form" id="calc">
+        <div class="calc-field">
+          <label for="sex">性別</label>
+          <select id="sex">
+            <option value="male">男性</option>
+            <option value="female">女性</option>
+          </select>
+        </div>
+        <div class="calc-field">
+          <label for="age">年齢</label>
+          <input type="number" id="age" value="30" min="15" max="100" inputmode="numeric" />
+        </div>
+        <div class="calc-field">
+          <label for="height">身長（cm）</label>
+          <input type="number" id="height" value="170" min="120" max="230" inputmode="decimal" />
+        </div>
+        <div class="calc-field">
+          <label for="weight">体重（kg）</label>
+          <input type="number" id="weight" value="60" min="30" max="200" inputmode="decimal" />
+        </div>
+        <div class="calc-field">
+          <label for="activity">活動量</label>
+          <select id="activity">
+            <option value="1.2">ほぼ運動なし（座り仕事中心）</option>
+            <option value="1.375">軽い運動（週1〜3回）</option>
+            <option value="1.55" selected>中程度（週3〜5回）</option>
+            <option value="1.725">ハード（週6〜7回）</option>
+            <option value="1.9">非常にハード（1日2回のトレーニング等）</option>
+          </select>
+        </div>
+      </form>
+
+      <div class="calc-result">
+        <p class="calc-result-label">1日の消費カロリー（TDEE）</p>
+        <p class="calc-result-value"><span id="tdee">—</span> kcal</p>
+        <p class="calc-result-sub">基礎代謝量 <span id="bmr">—</span> kcal に活動量を掛けて算出</p>
+      </div>
+
+      <div class="table-wrap">
+        <table class="food-table">
+          <thead><tr><th>目的</th><th>1日の摂取カロリーの目安</th></tr></thead>
+          <tbody>
+            <tr><th>減量したい</th><td><span id="cut">—</span> kcal（TDEE −20%）</td></tr>
+            <tr><th>体重を維持したい</th><td><span id="keep">—</span> kcal（TDEEと同じ）</td></tr>
+            <tr><th>増量したい</th><td><span id="bulk">—</span> kcal（TDEE +10%）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="food-disclaimer">この数値はあくまで推定値です。個人差があり、効果や結果を保証するものではありません。年齢・性別・体組成・持病・妊娠授乳の有無などによって適切な量は変わります。治療中の方、腎機能に不安のある方は、必ず医師・管理栄養士にご相談ください。</p>
+      <noscript><p class="food-disclaimer">お使いの環境ではJavaScriptが無効のため、自動計算は動作しません。下の「計算式」から手計算できます。</p></noscript>
+
+      <h2>計算式</h2>
+      <p>基礎代謝量はハリス・ベネディクト式の改訂版（Roza &amp; Shizgal, 1984）で求めています。</p>
+      <div class="table-wrap">
+        <table class="food-table">
+          <tbody>
+            <tr><th>男性</th><td>88.362 + 13.397 × 体重kg + 4.799 × 身長cm − 5.677 × 年齢</td></tr>
+            <tr><th>女性</th><td>447.593 + 9.247 × 体重kg + 3.098 × 身長cm − 4.330 × 年齢</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>これに活動量の係数（1.2〜1.9）を掛けたものがTDEEです。</p>
+
+      <h2>よくある質問</h2>
+      <div class="food-faq">
+        <div class="food-faq-item">
+          <h3>1日に必要なカロリーはどうやって計算しますか？</h3>
+          <p>まず基礎代謝量（安静時に消費するエネルギー）を身長・体重・年齢・性別から求め、それに活動量に応じた係数を掛けて1日の消費カロリー（TDEE）を算出します。本ページではハリス・ベネディクト式の改訂版を使っています。</p>
+        </div>
+        <div class="food-faq-item">
+          <h3>基礎代謝量とTDEEの違いは何ですか？</h3>
+          <p>基礎代謝量は横になって何もしない状態で消費するエネルギーです。TDEE（total daily energy expenditure）は、そこに日常の活動や運動による消費を加えた1日の合計です。食事の目安に使うのはTDEEのほうです。</p>
+        </div>
+        <div class="food-faq-item">
+          <h3>減量したい場合は何kcalにすればよいですか？</h3>
+          <p>一般に、消費カロリーより摂取カロリーが少ない状態が続くと体重は減ります。急激な制限は栄養不足につながるため、TDEEから15〜20%程度を引いた値が目安として使われます。適切な設定は個人差が大きいため、医師・管理栄養士にご相談ください。</p>
+        </div>
+        <div class="food-faq-item">
+          <h3>計算した内容は送信されますか？</h3>
+          <p>送信されません。計算はすべてブラウザの中で行われ、入力した身長・体重・年齢がサーバーに送られることはありません。</p>
+        </div>
+      </div>
+
+      <section class="food-source">
+        <h2>出典と注意事項</h2>
+        <p>計算式は Roza AM, Shizgal HM. "The Harris Benedict equation reevaluated" (Am J Clin Nutr, 1984) に基づきます。活動量の係数は同式で一般に用いられる区分を使用しています。エネルギー必要量の考え方は厚生労働省『日本人の食事摂取基準（2025年版）』を参照しています。</p>
+        <p class="food-disclaimer">この数値はあくまで推定値です。個人差があり、効果や結果を保証するものではありません。年齢・性別・体組成・持病・妊娠授乳の有無などによって適切な量は変わります。治療中の方、腎機能に不安のある方は、必ず医師・管理栄養士にご相談ください。</p>
+        <p class="food-disclaimer">本ページは栄養に関する情報提供を目的としたもので、医療上の助言ではありません。特定の疾病の予防・治療・改善を目的とするものではありません。</p>
+      </section>
+
+      <h2>次にやること</h2>
+      <ul class="food-links">
+        <li><a href="pfc-calculator.html">PFCバランスを計算する</a> <span class="food-links-note">算出したカロリーをたんぱく質・脂質・炭水化物に配分</span></li>
+        <li><a href="protein-calculator.html">たんぱく質の必要量を計算する</a></li>
+        <li><a href="../foods/">食品成分表で実際の食品を調べる</a></li>
+      </ul>
+
+      <div class="mid-cta">
+        <p>毎日の記録は、プロテインノートで。基本機能は無料です。</p>
+        <a href="https://apps.apple.com/jp/app/id6748221439" class="store-badge" target="_blank" rel="noopener noreferrer" data-cta="tools">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83" alt="App Storeからダウンロード" width="157" height="54" loading="lazy" />
+        </a>
+      </div>
+
+      <nav class="guide-nav"><a href="./">← 計算ツール一覧</a><a href="pfc-calculator.html">PFCバランス計算 →</a></nav>
+    </main>
+
+    <footer class="site-footer">
+      <div class="inner">
+        <nav>
+          <a href="../foods/">食品成分表</a>
+          <a href="../tools/">計算ツール</a>
+          <a href="../guide/">使い方ガイド</a>
+          <a href="../faq.html">よくある質問</a>
+          <a href="../support.html">サポート</a>
+          <a href="../privacy.html">プライバシーポリシー</a>
+          <a href="../terms.html">利用規約</a>
+        </nav>
+        <p class="copyright">© THE SLOPE BOOK</p>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        var ids = ['sex', 'age', 'height', 'weight', 'activity'];
+        function n(id) { return parseFloat(document.getElementById(id).value); }
+        function calc() {
+          var age = n('age'), h = n('height'), w = n('weight'), act = n('activity');
+          if (!(age > 0 && h > 0 && w > 0 && act > 0)) return;
+          var male = document.getElementById('sex').value === 'male';
+          var bmr = male
+            ? 88.362 + 13.397 * w + 4.799 * h - 5.677 * age
+            : 447.593 + 9.247 * w + 3.098 * h - 4.330 * age;
+          var tdee = bmr * act;
+          var r = function (v) { return Math.round(v).toLocaleString('ja-JP'); };
+          document.getElementById('bmr').textContent = r(bmr);
+          document.getElementById('tdee').textContent = r(tdee);
+          document.getElementById('cut').textContent = r(tdee * 0.8);
+          document.getElementById('keep').textContent = r(tdee);
+          document.getElementById('bulk').textContent = r(tdee * 1.1);
+        }
+        ids.forEach(function (id) {
+          var el = document.getElementById(id);
+          el.addEventListener('input', calc);
+          el.addEventListener('change', calc);
+        });
+        calc();
+      })();
+    </script>
+  </body>
+</html>
