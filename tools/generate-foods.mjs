@@ -174,6 +174,50 @@ const SEIBUNHYO = (() => {
   }
 })();
 
+
+/**
+ * LP に手書きしてある数値が、実データとずれていないか検査する
+ *
+ * docs/index.html の統計バーは食品数・種目数を直接書いており、
+ * データを更新しても自動では追随しない。実際に食品DBを 695→654 に減らしたあとも
+ * 「695 食品データベース」と表示し続けていた（2回目の同種事故）。
+ *
+ * 事実と違う数値を製品の訴求として出すのは景表法上の問題になりうるので、
+ * 生成のたびに機械的に検出する。直すのは人だが、気づけないことを無くす。
+ */
+function checkHardcodedStats(foodCount) {
+  const problems = [];
+  const lp = path.join(DOCS, 'index.html');
+  if (!fs.existsSync(lp)) return problems;
+  const html = fs.readFileSync(lp, 'utf8');
+
+  // 食品数
+  const m = /data-count="(\d+)"[^>]*>[^<]*<\/span>\s*<span class="stat-label">食品データベース/.exec(html);
+  if (!m) problems.push('LPの食品数の記載を見つけられませんでした（HTMLの構造が変わった可能性）');
+  else if (Number(m[1]) !== foodCount) {
+    problems.push(`LPの食品数が実データとずれています: 表示 ${m[1]} / 実際 ${foodCount}（docs/index.html）`);
+  }
+
+  // 種目数（アプリ側の exerciseDatabase.ts を数える）
+  try {
+    const ex = fs.readFileSync(path.join(APP_REPO, 'src/data/exerciseDatabase.ts'), 'utf8');
+    const exCount = (ex.match(/^\s+name:/gm) || []).length;
+    const e = /data-count="(\d+)"([^>]*)>[^<]*<\/span>\s*<span class="stat-label">筋トレ種目/.exec(html);
+    if (e) {
+      if (Number(e[1]) !== exCount) {
+        problems.push(`LPの筋トレ種目数がずれています: 表示 ${e[1]} / 実際 ${exCount}`);
+      }
+      // 「60+」のような上振れ表記は、実数ちょうどのときは事実と違う
+      if (/data-suffix="\+"/.test(e[2]) && Number(e[1]) >= exCount) {
+        problems.push(`LPが「${e[1]}+」と表示していますが実数は ${exCount} です（「+」は事実と違う）`);
+      }
+    }
+  } catch {
+    // 種目DBが読めないときは黙って飛ばす（食品ページ生成の妨げにしない）
+  }
+  return problems;
+}
+
 // ---------------------------------------------------------------------------
 // ユーティリティ
 // ---------------------------------------------------------------------------
@@ -747,6 +791,13 @@ ${urls
   console.log(`sitemap: ${path.join(DOCS, 'sitemap-foods.xml')} (${urls.length} URL)`);
   console.log(`出典表記: ${FOOD_DATA_SOURCE}`);
   console.log('公開対象: 全件（出典は食品ごとにページへ明記）');
+
+  const stat = checkHardcodedStats(total);
+  if (stat.length) {
+    console.log('\n⚠ LPの手書き数値が実データとずれています');
+    stat.forEach((p) => console.log('  ' + p));
+    process.exitCode = 1;
+  }
 }
 
 main();
