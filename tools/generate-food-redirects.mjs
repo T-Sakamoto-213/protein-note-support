@@ -32,6 +32,39 @@ const OUT_DIR = path.join(ROOT, 'docs', 'foods');
 const SITE = 'https://protein-note.theslopebook.jp';
 
 /**
+ * 旧カテゴリページ → 新カテゴリページ
+ *
+ * カテゴリを25→14に再編したときに、旧カテゴリのURLが全て404になった。
+ * 中身が新カテゴリに丸ごと引き継がれているものは、そこへ寄せる。
+ *
+ * 「加工食品・その他」だけは中身が肉類・魚介類・プロテイン製品に分かれたため
+ * 単一の移動先が無い。一覧ページへ送る。
+ */
+const CATEGORY_REDIRECTS = {
+  'category-穀類': 'category-ごはん-パン-麺',
+  'category-パン-ベーカリー': 'category-ごはん-パン-麺',
+  'category-豆類': 'category-豆-大豆製品',
+  'category-野菜類': 'category-野菜',
+  'category-野菜類詳細': 'category-野菜',
+  'category-果実類': 'category-果物',
+  'category-果物詳細': 'category-果物',
+  'category-きのこ類': 'category-きのこ-海藻',
+  'category-藻類': 'category-きのこ-海藻',
+  'category-いも-でん粉類': 'category-いも-ナッツ',
+  'category-種実類': 'category-いも-ナッツ',
+  'category-調味料-ソース': 'category-調味料-油',
+  'category-軽食-スナック': 'category-菓子-軽食',
+  'category-プロテイン製品一般': 'category-プロテイン製品',
+  'category-調理済み料理': 'category-料理-おかず',
+  'category-家庭料理': 'category-料理-おかず',
+  'category-デリ-惣菜': 'category-料理-おかず',
+  'category-冷凍食品': 'category-料理-おかず',
+  'category-外食一般': 'category-料理-おかず',
+  'category-コンビニ-惣菜': 'category-料理-おかず',
+  'category-加工食品-その他': 'index',
+};
+
+/**
  * 旧URLのslug → 新URLのslug
  * 「同じ食品を指しているか」だけで判断する。似ているだけの食品は入れない。
  */
@@ -88,7 +121,7 @@ function stub(fromName, toSlug) {
 
 let written = 0;
 const missing = [];
-for (const [from, to] of Object.entries(REDIRECTS)) {
+for (const [from, to] of Object.entries({ ...REDIRECTS, ...CATEGORY_REDIRECTS })) {
   const target = path.join(OUT_DIR, `${to}.html`);
   if (!fs.existsSync(target)) { missing.push(`${from} → ${to}（移動先が無い）`); continue; }
   fs.writeFileSync(path.join(OUT_DIR, `${from}.html`), stub(from, to), 'utf8');
