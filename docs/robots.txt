@@ -30,3 +30,4 @@ User-agent: CCBot
 Allow: /
 
 Sitemap: https://protein-note.theslopebook.jp/sitemap.xml
+Sitemap: https://protein-note.theslopebook.jp/sitemap-foods.xml

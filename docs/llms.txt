@@ -16,7 +16,7 @@
 - 統計・可視化: 週間スコア、90日達成マップ、PFCバランス、体重グラフ、カレンダー
 - コミュニティ: フレンドコードで友達追加、ワークアウトへのリアクション
 - バッジ・ストリーク: 連続記録の可視化と自動フリーズ保護
-- 696食品のデータベース、カスタム食品・マイレシピ登録
+- 695食品のデータベース、カスタム食品・マイレシピ登録
 
 ## 料金
 
@@ -40,6 +40,12 @@
 - [AIコーチの使い方](https://protein-note.theslopebook.jp/guide/ai-coach.html): 性格5段階・アドバイス・チャット
 - [データ管理・機種変更](https://protein-note.theslopebook.jp/guide/data.html): 引き継ぎ・HealthKit・CSVエクスポート・退会
 - [料金プラン](https://protein-note.theslopebook.jp/guide/pricing.html): 無料とプレミアムの全項目比較・解約方法
+
+## 栄養データ・ツール
+
+- [食品成分表](https://protein-note.theslopebook.jp/foods/): 375品目・21分類の100gあたりタンパク質・カロリー・脂質・炭水化物。出典は文部科学省『日本食品標準成分表2015年版（七訂）』
+- [タンパク質が多い食品ランキング100](https://protein-note.theslopebook.jp/foods/protein-ranking.html): 100gあたりのタンパク質量が多い順
+- [タンパク質必要量の計算](https://protein-note.theslopebook.jp/tools/protein-calculator.html): 体重・運動量・目的から1日の目安量を算出。登録不要・ブラウザ内で完結
 - [プライバシーポリシー](https://protein-note.theslopebook.jp/privacy.html)
 - [Privacy Policy (English)](https://protein-note.theslopebook.jp/privacy-en.html)
 - [利用規約](https://protein-note.theslopebook.jp/terms.html)

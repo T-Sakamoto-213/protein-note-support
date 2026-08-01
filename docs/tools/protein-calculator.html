@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>タンパク質必要量の計算｜体重・運動量から1日の目安を計算 - プロテインノート</title>
+    <meta name="description" content="体重・運動量・目的から、1日に摂るタンパク質の目安量を計算します。厚生労働省『日本人の食事摂取基準（2025年版）』とISSNのポジションスタンドを参考にした体重1kgあたりの係数を使用。登録不要・無料。" />
+    <link rel="canonical" href="https://protein-note.theslopebook.jp/tools/protein-calculator.html" />
+    <meta property="og:site_name" content="プロテインノート" />
+    <meta property="og:title" content="タンパク質必要量の計算｜体重・運動量から1日の目安を計算 - プロテインノート" />
+    <meta property="og:description" content="体重・運動量・目的から、1日に摂るタンパク質の目安量を計算します。登録不要・無料。" />
+    <meta property="og:image" content="https://protein-note.theslopebook.jp/images/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://protein-note.theslopebook.jp/tools/protein-calculator.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="../favicon.ico" sizes="32x32" />
+    <link rel="icon" href="../images/icon-96.png" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="../images/icon-180.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/lp.css" />
+    <link rel="stylesheet" href="../css/foods.css" />
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://protein-note.theslopebook.jp/" },
+    { "@type": "ListItem", "position": 2, "name": "タンパク質必要量の計算", "item": "https://protein-note.theslopebook.jp/tools/protein-calculator.html" }
+  ]
+}
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SD50LR5JYC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SD50LR5JYC');
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="inner">
+        <a href="../" class="logo">
+          <img src="../images/icon-96.png" alt="プロテインノート" width="32" height="32" />
+          Protein Note
+        </a>
+        <nav>
+          <a href="../foods/">食品成分表</a>
+          <a href="./protein-calculator.html">必要量の計算</a>
+          <a href="../">ホーム</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <nav class="breadcrumb" aria-label="パンくず"><a href="../">ホーム</a> › <span>タンパク質必要量の計算</span></nav>
+      <h1>タンパク質必要量の計算</h1>
+
+      <p class="support-lead">
+        体重・運動量・目的から、1日に摂るタンパク質の目安量を計算します。登録不要で、入力した内容が送信されることはありません（計算はすべてブラウザ内で行われます）。
+      </p>
+
+      <form class="calc-form" id="calc-form">
+        <div class="calc-field">
+          <label for="weight">体重（kg）</label>
+          <input type="number" id="weight" name="weight" min="30" max="200" step="0.1" value="60" inputmode="decimal" />
+          <p class="calc-hint">30〜200kgの範囲で入力してください。</p>
+        </div>
+
+        <div class="calc-field">
+          <span class="calc-label">運動量</span>
+          <div class="calc-options">
+            <label class="calc-option"><input type="radio" name="activity" value="sedentary" checked /><span class="calc-option-text">ほぼ運動なし<small>座り仕事中心</small></span></label>
+            <label class="calc-option"><input type="radio" name="activity" value="light" /><span class="calc-option-text">軽い運動<small>週1〜3回</small></span></label>
+            <label class="calc-option"><input type="radio" name="activity" value="moderate" /><span class="calc-option-text">中程度<small>週3〜5回</small></span></label>
+            <label class="calc-option"><input type="radio" name="activity" value="active" /><span class="calc-option-text">ハード<small>週6〜7回</small></span></label>
+            <label class="calc-option"><input type="radio" name="activity" value="very_active" /><span class="calc-option-text">非常にハード<small>1日2回のトレーニング等</small></span></label>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <span class="calc-label">目的</span>
+          <div class="calc-options">
+            <label class="calc-option"><input type="radio" name="goal" value="maintain" checked /><span class="calc-option-text">体重を維持<small>今のままキープ</small></span></label>
+            <label class="calc-option"><input type="radio" name="goal" value="lose" /><span class="calc-option-text">減量<small>体重を減らしたい</small></span></label>
+            <label class="calc-option"><input type="radio" name="goal" value="gain" /><span class="calc-option-text">筋肉をつけたい<small>筋肥大を目指す</small></span></label>
+            <label class="calc-option"><input type="radio" name="goal" value="health" /><span class="calc-option-text">健康的に過ごす<small>バランスよく食事</small></span></label>
+          </div>
+        </div>
+      </form>
+
+      <div class="calc-result" id="calc-result" hidden>
+        <p class="calc-result-label">1日のタンパク質の目安</p>
+        <p class="calc-result-value"><span id="calc-grams">—</span><span>g</span></p>
+        <p class="calc-result-sub">体重1kgあたり <span id="calc-per-kg">—</span>g で算出</p>
+        <p class="calc-note" id="calc-note">
+          この数値はあくまで推定値です。個人差があり、効果や結果を保証するものではありません。年齢・性別・体組成・持病・妊娠授乳の有無などによって適切な量は変わります。腎機能に不安のある方、治療中の方は、必ず医師・管理栄養士にご相談ください。
+        </p>
+      </div>
+
+      <noscript>
+        <div class="calc-noscript">
+          お使いの環境ではJavaScriptが無効のため、自動計算は動作しません。下の「計算の考え方」の表から、体重1kgあたりの係数を体重に掛けて算出してください。
+        </div>
+      </noscript>
+
+      <h2>計算の考え方</h2>
+      <p>運動量に応じた体重1kgあたりの目安量に、体重を掛けて算出しています。減量中・筋肉をつけたい場合は 0.2g/kg を加算し、上限を 2.0g/kg としています。</p>
+
+      <div class="table-wrap">
+        <table class="food-table food-table--list">
+          <thead><tr><th>運動量</th><th>体重1kgあたり</th><th>減量・筋肥大の場合</th></tr></thead>
+          <tbody>
+            <tr><td>ほぼ運動なし</td><td>1.0g</td><td>1.2g</td></tr>
+            <tr><td>軽い運動（週1〜3回）</td><td>1.2g</td><td>1.4g</td></tr>
+            <tr><td>中程度（週3〜5回）</td><td>1.4g</td><td>1.6g</td></tr>
+            <tr><td>ハード（週6〜7回）</td><td>1.6g</td><td>1.8g</td></tr>
+            <tr><td>非常にハード（1日2回等）</td><td>1.8g</td><td>2.0g</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="calc-note">
+        この数値はあくまで推定値です。個人差があり、効果や結果を保証するものではありません。
+      </p>
+
+      <section class="food-source">
+        <h2>出典と注意事項</h2>
+        <p>体重1kgあたりの係数は、以下を参考にしています。</p>
+        <p>・厚生労働省『日本人の食事摂取基準（2025年版）』</p>
+        <p>・ISSN Position Stand: protein and exercise (Jäger et al., 2017, J Int Soc Sports Nutr)</p>
+        <p class="food-disclaimer">本ページは栄養に関する情報提供を目的としたもので、医療上の助言ではありません。特定の疾病の予防・治療・改善を目的とするものではなく、効果を保証するものでもありません。体調や既往症に応じた判断は医師・管理栄養士にご相談ください。</p>
+      </section>
+
+      <h2>食品からどれくらい摂れるか調べる</h2>
+      <p>算出した目安量を、実際の食品でどう満たすかは<a href="../foods/">食品成分表</a>で確認できます。100gあたり・1食分の目安あたりのタンパク質量を掲載しています。</p>
+      <ul class="food-links">
+        <li><a href="../foods/protein-ranking.html">タンパク質が多い食品ランキング100</a></li>
+        <li><a href="../foods/">分類から食品を探す</a></li>
+      </ul>
+
+      <div class="mid-cta">
+        <p>毎日の摂取量の記録は、プロテインノートで。基本機能は無料です。</p>
+        <a href="https://apps.apple.com/jp/app/id6748221439" class="store-badge" target="_blank" rel="noopener noreferrer" data-cta="tools_protein_calculator">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83" alt="App Storeからダウンロード" width="157" height="54" loading="lazy" />
+        </a>
+      </div>
+
+      <nav class="guide-nav"><a href="../foods/">← 食品成分表</a><a href="../guide/">使い方ガイド →</a></nav>
+    </main>
+
+    <footer class="site-footer">
+      <div class="inner">
+        <nav>
+          <a href="../">ホーム</a>
+          <a href="../foods/">食品成分表</a>
+          <a href="./protein-calculator.html">必要量の計算</a>
+          <a href="../guide/">使い方ガイド</a>
+          <a href="../faq.html">よくある質問</a>
+          <a href="../terms.html">利用規約</a>
+          <a href="../privacy.html">プライバシーポリシー</a>
+        </nav>
+        <p class="copyright">本サイトはアクセス状況の把握のため Google Analytics を使用しています。</p>
+        <p class="copyright">&copy; 2025-2026 Protein Note. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // アプリ側 src/utils/nutritionCalculator.ts の calculateRecommendedProteinForActivity と
+      // 同一のロジック。値を変更するときは必ず両方を揃えること。
+      (function () {
+        var BASE = { sedentary: 1.0, light: 1.2, moderate: 1.4, active: 1.6, very_active: 1.8 };
+        var form = document.getElementById('calc-form');
+        var result = document.getElementById('calc-result');
+        var gramsEl = document.getElementById('calc-grams');
+        var perKgEl = document.getElementById('calc-per-kg');
+        if (!form || !result) return;
+
+        function checked(name) {
+          var el = form.querySelector('input[name="' + name + '"]:checked');
+          return el ? el.value : null;
+        }
+
+        function update() {
+          var weight = parseFloat(document.getElementById('weight').value);
+          if (!isFinite(weight) || weight < 30 || weight > 200) {
+            result.hidden = true;
+            return;
+          }
+          var base = BASE[checked('activity')] || BASE.sedentary;
+          var goal = checked('goal');
+          var adjusted = goal === 'lose' || goal === 'gain' ? Math.min(base + 0.2, 2.0) : base;
+          gramsEl.textContent = String(Math.round(weight * adjusted));
+          perKgEl.textContent = String(Math.round(adjusted * 10) / 10);
+          result.hidden = false;
+        }
+
+        form.addEventListener('input', update);
+        form.addEventListener('change', update);
+        form.addEventListener('submit', function (e) { e.preventDefault(); update(); });
+        update();
+      })();
+
+      document.querySelectorAll('[data-cta]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (typeof gtag === 'function') {
+            gtag('event', 'cta_click', { cta_location: a.getAttribute('data-cta') });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

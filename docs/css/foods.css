@@ -1,0 +1,328 @@
+/*
+ * 食品成分表・計算ツール用のスタイル
+ *
+ * style.css / lp.css には一切手を入れない方針（CLAUDE.md の互換維持ルール）。
+ * このファイルは /foods/ と /tools/ からのみ読み込まれるため、既存ページへの影響はない。
+ * 変数（--primary, --surface 等）は style.css の :root を利用する。
+ */
+
+/* 横に長い表はページ全体を横スクロールさせず、表の中だけをスクロールさせる */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 20px 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.food-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 15px;
+}
+
+.table-wrap .food-table {
+  margin: 0;
+  border-radius: 0;
+}
+
+.food-table th,
+.food-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.food-table tbody tr:last-child th,
+.food-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* 縦2列の成分表: 左が項目名 */
+.food-table tbody th {
+  width: 40%;
+  color: var(--text-secondary);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.food-table tbody td {
+  color: var(--text);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 一覧・ランキング用の表 */
+.food-table--list {
+  min-width: 560px;
+}
+
+.food-table--list thead th {
+  background: var(--surface-elevated);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.food-table--list tbody th,
+.food-table--list tbody td {
+  width: auto;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.food-table--list tbody td:first-child {
+  white-space: normal;
+  font-weight: 500;
+}
+
+.food-table--list tbody td a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.food-table--list tbody td a:hover {
+  text-decoration: underline;
+}
+
+/* 関連食品・カテゴリのリンクリスト */
+.food-links {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 28px;
+}
+
+.food-links li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.food-links li::marker {
+  content: none;
+}
+
+.food-links a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.food-links a:hover {
+  text-decoration: underline;
+}
+
+.food-links-note {
+  color: var(--text-tertiary);
+  font-size: 13px;
+  margin-left: 8px;
+}
+
+.food-links--grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0 20px;
+}
+
+/* 出典・免責。打ち消し表示は本文と同じ大きさで、主張のすぐ下に置く */
+.food-source {
+  margin: 36px 0 24px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.food-source h2 {
+  margin-top: 0;
+  font-size: 17px;
+}
+
+.food-source p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.food-source p + p {
+  margin-top: 10px;
+}
+
+/* 消費者庁ガイドライン: 打ち消し表示は主張の80%以上のフォントサイズ。
+   本文14pxに対し13px（約93%）を確保し、主張の直後に配置する */
+.food-disclaimer {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: 10px;
+}
+
+/* ------------------------------------------------------------------ */
+/* タンパク質必要量の計算ツール                                        */
+/* ------------------------------------------------------------------ */
+
+.calc-form {
+  margin: 24px 0;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.calc-field {
+  margin-bottom: 22px;
+}
+
+.calc-field:last-child {
+  margin-bottom: 0;
+}
+
+.calc-field > label,
+.calc-field > .calc-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.calc-field input[type='number'] {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+}
+
+.calc-field input[type='number']:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.calc-hint {
+  margin-top: 8px;
+  color: var(--text-tertiary);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.calc-options {
+  display: grid;
+  gap: 8px;
+}
+
+.calc-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.calc-option input {
+  margin-top: 3px;
+  accent-color: var(--primary);
+  flex-shrink: 0;
+}
+
+.calc-option:hover {
+  border-color: var(--primary);
+}
+
+.calc-option-text {
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.calc-option-text small {
+  display: block;
+  color: var(--text-tertiary);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.calc-result {
+  margin: 24px 0;
+  padding: 28px 24px;
+  background: var(--surface);
+  border: 1px solid var(--primary);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.calc-result-label {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.calc-result-value {
+  color: var(--primary);
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-result-value span {
+  font-size: 22px;
+  margin-left: 2px;
+}
+
+.calc-result-sub {
+  margin-top: 10px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* 打ち消し表示: 主張（結果）の直下・本文と同等サイズ。※印だけの小さな注記にしない */
+.calc-note {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: left;
+}
+
+.calc-noscript {
+  margin: 20px 0;
+  padding: 16px 20px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+  .food-table th,
+  .food-table td {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .calc-form {
+    padding: 18px;
+  }
+
+  .calc-result-value {
+    font-size: 38px;
+  }
+
+  .food-links--grid {
+    grid-template-columns: 1fr;
+  }
+}
