@@ -326,3 +326,20 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* 材料内訳の表。列が5つあり狭い画面に収まらないため、
+   ページ全体を横スクロールさせず表だけをスクロールさせる */
+.food-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+}
+.food-table-wrap .food-table {
+  min-width: 34rem;
+  margin-bottom: 0;
+}
+.food-table tfoot th,
+.food-table tfoot td {
+  font-weight: 600;
+  border-top: 2px solid currentColor;
+}

@@ -28,10 +28,12 @@ const DOCS = path.join(ROOT, 'docs');
 const OUT_DIR = path.join(DOCS, 'foods');
 
 /** アプリ側リポジトリ（読み取り専用） */
-const APP_DB_PATH = path.resolve(
-  ROOT,
-  '../Protein_Note/protein-note/src/data/foodDatabase.ts',
-);
+const APP_REPO = path.resolve(ROOT, '../Protein_Note/protein-note');
+const APP_DB_PATH = path.join(APP_REPO, 'src/data/foodDatabase.ts');
+/** 自社算出の材料内訳（成分表に収載がない料理のレシピ定義） */
+const APP_RECIPES_PATH = path.join(APP_REPO, 'scripts/food-data/recipes.json');
+/** 材料の食品番号から成分表の名前と栄養値を引くための元データ */
+const APP_SEIBUNHYO_PATH = path.join(APP_REPO, 'scripts/food-data/seibunhyo_8th_2023.json');
 
 const SITE = 'https://protein-note.theslopebook.jp';
 const GA_ID = 'G-SD50LR5JYC';
@@ -56,24 +58,48 @@ const FOOD_DATA_SOURCE =
   '文部科学省『日本食品標準成分表（八訂）増補2023年』';
 
 /**
- * 公開対象とする source（これ以外は生成しない）
+ * 出典の種類（アプリの source 文字列 → ページに書く表記）
  *
- * ★ 重要: アプリの食品DB654件の出典は次の3種類。
- *     日本食品標準成分表（八訂）増補2023年   611
- *     自社算出（日本食品標準成分表に基づく）  24  … 成分表の食材値からレシピで計算
- *     市販品の栄養成分表示に基づく参考値      19  … プロテイン等、成分表に収載され得ないもの
+ * ★ 以前は成分表由来の611件だけを公開し、残り43件を落としていた。
+ *   アプリには654件あるのにサイトには611件しかない状態で、
+ *   アプリで見た食品をサイトで探すと見つからないという食い違いが起きていた。
  *
- *   Webに載せるのは【成分表の収載値そのもの611件だけ】にする。
- *   自社算出は計算過程がサイト上で検証できず、成分表の値と誤認されうる。
- *   市販品参考値は特定商品の表示値で、公的な出典として提示できない。
- *   どちらも「出典: 日本食品標準成分表」と書けば虚偽表示になる（景表法）。
+ *   落としていた理由は「全件を『出典: 日本食品標準成分表』として公開すると
+ *   虚偽表示になる」というものだったが、正しい解決は非公開にすることではなく
+ *   【ページごとに実際の出典を書く】こと。3種類を出し分けて全件公開する。
  *
- *   対象を広げる場合は、各ページに実際のsourceを個別表示し、算出根拠を明示すること。
+ *     日本食品標準成分表（八訂）増補2023年  611  収載値そのもの。食品番号を併記
+ *     自社算出（成分表に基づく）            24  材料と分量の内訳表を併載して検証可能にする
+ *     市販品の栄養成分表示に基づく参考値      19  成分表に収載され得ないもの。製品差を明記
  *
- *   ※ 刷新前は カロリーSlism 282件 を含んでいたため公開できず375件に絞っていた。
- *      全件を成分表由来に置き換えたことで、公開できる件数が611件に増えている。
+ *   自社算出の内訳は recipes.json（アプリ側リポジトリ）から読む。
+ *   材料に食品番号が付いているので、読み手が成分表で1つずつ検算できる。
+ *   これは他サイトには無い独自の情報でもある。
  */
-const ALLOWED_SOURCE = '日本食品標準成分表（八訂）増補2023年';
+const SOURCE_OFFICIAL = '日本食品標準成分表（八訂）増補2023年';
+
+/** アプリの source からページ用の出典文を作る */
+function sourceTextFor(item) {
+  const src = String(item.source || '');
+  if (item.seibunhyoNo && src === SOURCE_OFFICIAL) {
+    return `栄養成分値は${esc(FOOD_DATA_SOURCE)}の収載値です（食品番号 ${esc(item.seibunhyoNo)}）。同成分表は政府標準利用規約（第2.0版）に基づき、出典を明示したうえで利用しています。`;
+  }
+  if (src.startsWith('自社算出')) {
+    return `この料理は${esc(FOOD_DATA_SOURCE)}に収載がないため、同成分表に収載されている材料の値から当サイトが計算した参考値です。計算に使った材料と分量は下の表のとおりで、各材料の食品番号から成分表の値を確認できます。レシピは標準的な構成の推定であり、店舗や家庭によって変動します。`;
+  }
+  if (src.startsWith('市販')) {
+    return `この食品は原料の性質上${esc(FOOD_DATA_SOURCE)}に収載がありません。国内で広く流通している製品の栄養成分表示（食品表示法により表示が義務づけられた公開情報）に基づく参考値です。製品ごとに配合が異なるため、実際にお使いの製品の表示をご確認ください。`;
+  }
+  return `栄養成分値は${esc(FOOD_DATA_SOURCE)}を基にした参考値です。`;
+}
+
+/** 出典の短い分類名（一覧・description 用） */
+function sourceKindFor(item) {
+  const src = String(item.source || '');
+  if (src.startsWith('自社算出')) return '当サイトによる算出値';
+  if (src.startsWith('市販')) return '市販品の栄養成分表示に基づく参考値';
+  return FOOD_DATA_SOURCE;
+}
 
 /** 全ページ共通の免責（主張の直下に、本文と同じ大きさで置く） */
 const DISCLAIMER =
@@ -127,6 +153,26 @@ function loadFoodDatabase() {
   // 型注釈を含まない純粋なオブジェクトリテラルなのでそのまま評価できる
   return new Function(`return (${literal});`)();
 }
+
+/** 自社算出の材料内訳。キーは食品名。_readme 等のメタキーは除く */
+const RECIPES = (() => {
+  try {
+    const j = JSON.parse(fs.readFileSync(APP_RECIPES_PATH, 'utf8'));
+    return Object.fromEntries(Object.entries(j).filter(([k]) => !k.startsWith('_')));
+  } catch {
+    // レシピ定義が読めなくても内訳表が出ないだけで、ページ生成は続行できる
+    return {};
+  }
+})();
+
+/** 食品番号 → 成分表の収載名と栄養値 */
+const SEIBUNHYO = (() => {
+  try {
+    return new Map(JSON.parse(fs.readFileSync(APP_SEIBUNHYO_PATH, 'utf8')).map((f) => [f.no, f]));
+  } catch {
+    return new Map();
+  }
+})();
 
 // ---------------------------------------------------------------------------
 // ユーティリティ
@@ -266,12 +312,12 @@ ${body}
  * 番号を載せるのは、読み手が文部科学省の食品成分データベースで同じ値を引けるようにするため。
  */
 function sourceBlock(item) {
-  const no = item?.seibunhyoNo
-    ? `（食品番号 ${esc(item.seibunhyoNo)}）`
-    : '';
+  const text = item
+    ? sourceTextFor(item)
+    : `栄養成分値は${esc(FOOD_DATA_SOURCE)}の収載値です。同成分表は政府標準利用規約（第2.0版）に基づき、出典を明示したうえで利用しています。一部の料理・製品は成分表に収載がないため、材料からの算出値または市販品の栄養成分表示に基づく参考値を掲載しています（各食品のページに明記）。`;
   return `      <section class="food-source">
         <h2>出典と注意事項</h2>
-        <p>栄養成分値は${esc(FOOD_DATA_SOURCE)}の収載値です${no}。同成分表は政府標準利用規約（第2.0版）に基づき、出典を明示したうえで利用しています。</p>
+        <p>${text}</p>
         <p class="food-disclaimer">${esc(DISCLAIMER)}</p>
         <p class="food-disclaimer">本ページは栄養成分の情報提供を目的としたもので、医療上の助言ではありません。治療中の方や食事制限のある方は医師・管理栄養士にご相談ください。</p>
       </section>`;
@@ -304,6 +350,53 @@ ${row('脂質', item.fatPer100g, 'g')}
 ${row('炭水化物', item.carbsPer100g, 'g')}
         </tbody>
       </table>`;
+}
+
+/**
+ * 自社算出の食品に、計算に使った材料の内訳を出す。
+ *
+ * 数値だけ出して「算出値です」と書くのは、読み手にとって検証しようがない。
+ * 材料・分量・食品番号まで出せば、成分表を引いて1つずつ検算できる。
+ * 出典の誠実さの問題であると同時に、他サイトには無い独自の情報でもある。
+ */
+function breakdownSection(item) {
+  const recipe = RECIPES[item.name];
+  if (!recipe || !Array.isArray(recipe.ingredients)) return '';
+
+  const rows = recipe.ingredients
+    .map((ing) => {
+      const f = SEIBUNHYO.get(ing.no);
+      const g = num(ing.g);
+      const kcal = f && g !== null ? Math.round((f.kcal * g) / 100) : null;
+      const prot = f && g !== null ? Math.round((f.protein * g) / 100 * 10) / 10 : null;
+      return `          <tr>
+            <td>${esc(f ? f.name : ing.name || '—')}</td>
+            <td>${esc(ing.no)}</td>
+            <td>${g === null ? '—' : `${g}g`}</td>
+            <td>${prot === null ? '—' : `${prot}g`}</td>
+            <td>${kcal === null ? '—' : `${kcal}kcal`}</td>
+          </tr>`;
+    })
+    .join('\n');
+
+  const totalG = recipe.ingredients.reduce((n, i) => n + (num(i.g) ?? 0), 0);
+
+  return `      <h2>この数値の内訳</h2>
+      <p>${esc(item.name)}は日本食品標準成分表に収載がないため、成分表に収載されている次の材料の値から計算しています${recipe.note ? `（${esc(recipe.note)}）` : ''}。食品番号から成分表の値を確認できます。</p>
+      <div class="food-table-wrap">
+      <table class="food-table">
+        <thead>
+          <tr><th>材料（成分表の収載名）</th><th>食品番号</th><th>分量</th><th>タンパク質</th><th>カロリー</th></tr>
+        </thead>
+        <tbody>
+${rows}
+        </tbody>
+        <tfoot>
+          <tr><th>合計</th><td>—</td><td>${totalG}g</td><td>—</td><td>—</td></tr>
+        </tfoot>
+      </table>
+      </div>
+      <p class="food-disclaimer">100gあたりの値は、上の合計を総重量で割って換算したものです。レシピは標準的な構成の推定であり、店舗・家庭によって変動します。</p>`;
 }
 
 function pfcBalance(item) {
@@ -371,6 +464,8 @@ ${nutritionTable(item, 100)}
 ${servingSection}
 
 ${pfcBalance(item)}
+
+${breakdownSection(item)}
 
       <h2>${esc(categoryName)}のなかでの位置</h2>
       <p>${esc(categoryName)}に収録している${categoryCount}品目のうち、タンパク質量は<strong>${rank}番目</strong>です。</p>
@@ -556,8 +651,7 @@ function main() {
 
     for (const item of group.items) {
       if (!item || !item.name) continue;
-      // 出典が公的機関のものだけを公開する（上の ALLOWED_SOURCE のコメント参照）
-      if (item.source !== ALLOWED_SOURCE) continue;
+      // 全件公開する。出典は sourceTextFor() でページごとに書き分ける
       let slug = slugify(item.name);
       if (!slug) continue;
       if (seen.has(slug)) {
@@ -652,7 +746,7 @@ ${urls
   console.log(`出力先: ${OUT_DIR}`);
   console.log(`sitemap: ${path.join(DOCS, 'sitemap-foods.xml')} (${urls.length} URL)`);
   console.log(`出典表記: ${FOOD_DATA_SOURCE}`);
-  console.log(`公開対象: source === "${ALLOWED_SOURCE}" のみ（他の出典は非公開）`);
+  console.log('公開対象: 全件（出典は食品ごとにページへ明記）');
 }
 
 main();
