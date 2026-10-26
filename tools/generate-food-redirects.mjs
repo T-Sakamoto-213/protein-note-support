@@ -16,8 +16,16 @@
  *
  * ■ GitHub Pages には301が無い
  * 静的ホスティングなのでサーバー側リダイレクトを書けない。
- * canonical + meta refresh + noindex のスタブで代替する。
- * canonical があるため、検索エンジンは新URLへ評価を寄せる。
+ * canonical + meta refresh のスタブで代替する。
+ * 遅延0のmeta refreshはリダイレクトとして扱われ、canonical が新URLへ評価を寄せる。
+ *
+ * ■ noindex を付けてはならない（2026-10-27に削除）
+ * canonical は「このページと移動先を同一視し、移動先を登録せよ」、
+ * noindex は「登録するな」であり、同時に出すと矛盾したシグナルになる。
+ * Googleが noindex を canonical の移動先（＝本物のページ）に適用し、
+ * 移動先まで検索結果から落ちる危険がある。
+ * スタブ自体は遅延0で転送され canonical も向いているので、noindex 無しでも
+ * 実質インデックスされない。付ける利得が無く、リスクだけが残る。
  *
  * 実行: node tools/generate-food-redirects.mjs
  */
@@ -25,81 +33,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { REDIRECTS, CATEGORY_REDIRECTS } from './redirect-map.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const OUT_DIR = path.join(ROOT, 'docs', 'foods');
 const SITE = 'https://protein-note.theslopebook.jp';
-
-/**
- * 旧カテゴリページ → 新カテゴリページ
- *
- * カテゴリを25→14に再編したときに、旧カテゴリのURLが全て404になった。
- * 中身が新カテゴリに丸ごと引き継がれているものは、そこへ寄せる。
- *
- * 「加工食品・その他」だけは中身が肉類・魚介類・プロテイン製品に分かれたため
- * 単一の移動先が無い。一覧ページへ送る。
- */
-const CATEGORY_REDIRECTS = {
-  'category-穀類': 'category-ごはん-パン-麺',
-  'category-パン-ベーカリー': 'category-ごはん-パン-麺',
-  'category-豆類': 'category-豆-大豆製品',
-  'category-野菜類': 'category-野菜',
-  'category-野菜類詳細': 'category-野菜',
-  'category-果実類': 'category-果物',
-  'category-果物詳細': 'category-果物',
-  'category-きのこ類': 'category-きのこ-海藻',
-  'category-藻類': 'category-きのこ-海藻',
-  'category-いも-でん粉類': 'category-いも-ナッツ',
-  'category-種実類': 'category-いも-ナッツ',
-  'category-調味料-ソース': 'category-調味料-油',
-  'category-軽食-スナック': 'category-菓子-軽食',
-  'category-プロテイン製品一般': 'category-プロテイン製品',
-  'category-調理済み料理': 'category-料理-おかず',
-  'category-家庭料理': 'category-料理-おかず',
-  'category-デリ-惣菜': 'category-料理-おかず',
-  'category-冷凍食品': 'category-料理-おかず',
-  'category-外食一般': 'category-料理-おかず',
-  'category-コンビニ-惣菜': 'category-料理-おかず',
-  'category-加工食品-その他': 'index',
-};
-
-/**
- * 旧URLのslug → 新URLのslug
- * 「同じ食品を指しているか」だけで判断する。似ているだけの食品は入れない。
- */
-const REDIRECTS = {
-  // 成分表の収載名に合わせた改名
-  いちご: 'イチゴ',
-  桃: 'もも',
-  梨: 'なし',
-  キウイ: 'キウイフルーツ',
-  えのき: 'えのきたけ',
-  わかめ: 'わかめ生',
-  昆布: '昆布だし昆布',
-  ひじき: 'ひじき乾',
-  海苔: 'のり焼き',
-  にんにく生: 'にんにく',
-  生姜生: '生姜',
-  お茶: '緑茶',
-
-  // 表記ゆれ・別名の統合
-  中華麺ゆで: 'ラーメン生麺-ゆで',
-  バゲット: 'フランスパン',
-  バターロール: 'ロールパン',
-  調整豆乳: '調製豆乳', // 正しい表記は「調製」
-  豆乳無調整: '豆乳',
-  焼きサバ: 'さばの塩焼き',
-  焼き鮭: 'しゃけの塩焼き',
-  チョコレート: 'チョコレートミルク',
-
-  // 商品名をやめて一般名にしたもの
-  '6Pチーズ': 'ベビーチーズ',
-
-  // 成分表では部位を分けていないため統合したもの
-  鶏むね挽肉: '鶏挽肉',
-  鶏もも挽肉: '鶏挽肉',
-};
 
 function stub(fromName, toSlug) {
   const url = `${SITE}/foods/${encodeURIComponent(toSlug)}.html`;
@@ -109,7 +48,6 @@ function stub(fromName, toSlug) {
     <meta charset="UTF-8" />
     <meta http-equiv="refresh" content="0; url=${url}" />
     <link rel="canonical" href="${url}" />
-    <meta name="robots" content="noindex" />
     <title>${fromName}の栄養成分 | プロテインノート</title>
   </head>
   <body>

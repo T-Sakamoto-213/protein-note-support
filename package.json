@@ -1,0 +1,10 @@
+{
+  "name": "protein-note-support",
+  "private": true,
+  "type": "module",
+  "description": "プロテインノートのLP・サポート・法的文書を配信する静的サイト（main の docs/ が GitHub Pages で即公開される）",
+  "scripts": {
+    "build": "node tools/generate-foods.mjs && node tools/generate-food-redirects.mjs && node tools/generate-tools.mjs && node tools/verify.mjs",
+    "verify": "node tools/verify.mjs"
+  }
+}
